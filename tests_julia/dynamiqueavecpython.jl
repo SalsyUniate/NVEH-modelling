@@ -3,13 +3,13 @@ using Plots
 # np = pyimport("numpy")
 # sp = pyimport("scipy.integrate")
 # math = pyimport("math")
-pyimport("numba")
+# pyimport("numba")
 
 
 py"""
 import numpy as np
 from math import pi, sin
-from numba import jit
+# from numba import jit
 
 xpit = 0.5e-3  # meters
 omega0 = 121.0  # radians per second
@@ -25,7 +25,7 @@ dt = Td / NF  # TIME STEP
 t = np.arange(NT*NF+1)*dt
 X0 = np.array([-4.0 * xpit, 3.0 * xpit * omega0])
 
-@jit(nopython=True)
+# @jit(nopython=True)
 def f(X, t):
     x, dotx = X
     dotX = np.zeros(2)
@@ -33,7 +33,7 @@ def f(X, t):
     dotX[1] = -omega0/Q * dotx - omega0**2/2 * (x**3/xpit**2 - x) + Ad*sin(omegad*t)
     return dotX
 
-@jit(nopython=True)
+# @jit(nopython=True)
 def RK4(func, X0, t):
     dt = t[1] - t[0]
     nt = len(t)
@@ -47,8 +47,8 @@ def RK4(func, X0, t):
         X[i + 1] = X[i] + dt / 6.0 * (k1 + 2.0 * k2 + 2.0 * k3 + k4)
     return X
 
-@jit(nopython=True)
-def fonction():
+# @jit(nopython=True)
+def Duffing():
     sol = RK4(f, X0, t)
     x = sol[:,0]
     dotx = sol[:,1]
