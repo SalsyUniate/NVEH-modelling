@@ -164,3 +164,5 @@ cython_debug/
 # Ignore julia simulations 
 *.mp4 
 *.gif
+brouillon.jl
+tutorial.jl

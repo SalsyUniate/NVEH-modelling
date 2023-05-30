@@ -9,6 +9,7 @@ n = 100
 
 @gif for i in range(0, stop = 2π, length = n)
     f(x, y) = sin(x + 10sin(i)) + cos(y)
+    
 
     # create a plot with 3 subplots and a custom layout
     l = @layout [a{0.7w} b; c{0.2h}]

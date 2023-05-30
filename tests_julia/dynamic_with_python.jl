@@ -11,17 +11,16 @@ import numpy as np
 from math import pi, sin
 # from numba import jit
 
-xpit = 0.5e-3  # meters
-omega0 = 121.0  # radians per second
-Q = 87.0  # dimensionless
-fd = 50.0  # Hertz
-Ad = 2.5  # meters per second squared
-NT = 1000  # NUMBER OF EXCITATION PERIODS
-NF = 100  # FRAMES PER EXCITATION PERIODS
-fd = 25.0  # Hertz
+xpit = 0.5e-3  
+omega0 = 121.0  
+Q = 87.0 
+fd = 50.0  
+Ad = 2.5  
+NT = 1000 
+NF = 100  
 omegad = 2.0 * pi * fd
-Td = fd**-1  # EXCITATION FREQUENCY
-dt = Td / NF  # TIME STEP
+Td = fd**-1  
+dt = Td / NF  
 t = np.arange(NT*NF+1)*dt
 X0 = np.array([-4.0 * xpit, 3.0 * xpit * omega0])
 
