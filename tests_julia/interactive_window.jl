@@ -25,6 +25,7 @@ X0 = [-4.0*xpit, 3.0*xpit*omega0]
 global delta = 1
 global alpha = 1
 global beta = 1
+global coefTrig = 0
 
 
 
@@ -62,51 +63,52 @@ end
 
 
 # PLOT STATIC FIGURE
-function plotting()
-    fig = Figure(resolution = (400, 400), backgroundcolor = :white)
+function plottingDuff()
+    fig = Figure(resolution = (600, 450), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
         xlabel = "Speed",
         ylabel = "Acceleration"
         )
-
         xaxis = Duffing()[1]
         yaxis = Duffing()[2]
         lines!(ax, xaxis, yaxis)
     fig
 end
 
-p = Plots.plot([sin, cos], zeros(0), leg = false, xlims = (0, 2π), ylims = (-1, 1), resolution = (400, 400))
-anim = Animation()
-for x = range(0, stop = 2π, length = 20)
-    push!(p, x, Float64[sin(x), cos(x)])
-    frame(anim)
+function plottingTrig()
+    p = Plots.plot([cos, cos], zeros(0), leg = false, xlims = (0, 2π), ylims = (-2, 2), resolution = (400, 400))
+    anim = Animation()
+    for x = range(0, stop = 2π, length = 20)
+        push!(p, x, Float64[cos(x)+coefTrig, cos(x)*coefTrig])
+        frame(anim)
+    end
+    gif(anim, "anim_gr_ref002.gif")
 end
-gif(anim, "anim_gr_ref002.gif")
-movingtrigo = GtkImage("anim_gr_ref002.gif")
 
 
-histio() = show(io, MIME("image/png"), plotting())
+histio() = show(io, MIME("image/png"), plottingDuff())
+plottingTrig()
 
 function plotincanvas(h = 900, w = 800)
-    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)))
+    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)) |> (sliderTrig = GtkScale(false, -1:0.1:1)))
     grid = GtkGrid()
     Gtk.G_.value(sliderA, 1)
     Gtk.G_.value(sliderB, 1)
     Gtk.G_.value(sliderD, 1)
+    Gtk.G_.value(sliderTrig, 0)
+    movingtrigo = GtkImage("anim_gr_ref002.gif")
     can = GtkCanvas()
     
     @guarded draw(can) do widget
         ctx = getgc(can)
-        global alpha = (Gtk.GAccessor.value(sliderA))
-        global beta = (Gtk.GAccessor.value(sliderB))
-        global delta = (Gtk.GAccessor.value(sliderD))
         sleep(0.1)
         histio()
         img = read_from_png(io)
         set_source_surface(ctx, img, 0, 0)
         paint(ctx)
     end
+
 
     signal_connect(sliderA, "value-changed") do widget, others...
         global alpha = GAccessor.value(sliderA)
@@ -120,12 +122,17 @@ function plotincanvas(h = 900, w = 800)
         global delta = GAccessor.value(sliderD)
         draw(can)
     end
+    signal_connect(sliderTrig, "value-changed") do widget, others...
+        global coefTrig = GAccessor.value(sliderTrig)
+        plottingTrig()
+    end
 
     grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
     grid[1,2] = sliderB
     grid[1,3] = sliderD
-    grid[2,1:3] = can
-    grid[5,1:3] = movingtrigo
+    grid[1,4] = sliderTrig
+    grid[2,1] = can
+    grid[3,1] = movingtrigo
 
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
