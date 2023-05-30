@@ -5,6 +5,7 @@ using CairoMakie
 # using RecipesBase
 
 using Plots
+# using PyPlot
 
 # np = pyimport("numpy")
 
@@ -21,8 +22,8 @@ Td = 1/fd  # EXCITATION FREQUENCY
 dt = Td / NF  # TIME STEP
 t = (1:(NT*NF+1))*dt
 X0 = [-4.0*xpit, 3.0*xpit*omega0]
-alpha = 1
-beta = 1
+alpha = 0
+beta = 2
 delta = 1
 
 
@@ -63,24 +64,40 @@ function Duffing()
 end 
 
 
+
+
+
+
+
+p = Plots.plot([sin, cos], zeros(0), leg = false, xlims = (0, 4), ylims = (-0.25, 0.75))
+anim = Animation()
+for x = range(0, stop = 2π, length = 20)
+    push!(p, Duffing()[1], Duffing()[2])
+    frame(anim)
+end
+gif(anim, "anim_gr_ref002.gif")
+
+
+
+
+
+
 # PLOT STATIC FIGURE
+# fig = Figure(backgroundcolor = :white)
+# ax = Axis(fig[1, 1],
+#     title = "Duffing oscillator", 
+#     xlabel = "Speed",
+#     ylabel = "Acceleration"
+#     )
 
+# xaxis = Duffing()[1]
+# yaxis = Duffing()[2]
 
-fig = Figure(backgroundcolor = :white)
-ax = Axis(fig[1, 1],
-    title = "Duffing oscillator", 
-    xlabel = "Speed",
-    ylabel = "Acceleration"
-    )
+# slide = Slider(fig[2, 1], range = 0:0.01:4.99, startvalue = 3)
+# lines!(ax, xaxis, yaxis)
+# # plot(xaxis, yaxis)
 
-xaxis = Duffing()[1]
-yaxis = Duffing()[2]
-
-slide = Slider(fig[2, 1], range = 0:0.01:4.99, startvalue = 3)
-lines!(ax, xaxis, yaxis)
-# plot(xaxis, yaxis)
-
-display(fig)
+# display(fig)
 
 
 

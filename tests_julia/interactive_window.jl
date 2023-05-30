@@ -63,7 +63,7 @@ end
 
 # PLOT STATIC FIGURE
 function plotting()
-    fig = Figure(backgroundcolor = :white)
+    fig = Figure(resolution = (400, 400), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
         xlabel = "Speed",
@@ -76,10 +76,21 @@ function plotting()
     fig
 end
 
+p = Plots.plot([sin, cos], zeros(0), leg = false, xlims = (0, 2π), ylims = (-1, 1), resolution = (400, 400))
+anim = Animation()
+for x = range(0, stop = 2π, length = 20)
+    push!(p, x, Float64[sin(x), cos(x)])
+    frame(anim)
+end
+gif(anim, "anim_gr_ref002.gif")
+movingtrigo = GtkImage("anim_gr_ref002.gif")
+
+
 histio() = show(io, MIME("image/png"), plotting())
 
 function plotincanvas(h = 900, w = 800)
-    win = GtkWindow("WIP", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)))
+    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)))
+    grid = GtkGrid()
     Gtk.G_.value(sliderA, 1)
     Gtk.G_.value(sliderB, 1)
     Gtk.G_.value(sliderD, 1)
@@ -100,22 +111,27 @@ function plotincanvas(h = 900, w = 800)
     signal_connect(sliderA, "value-changed") do widget, others...
         global alpha = GAccessor.value(sliderA)
         draw(can)
-        println(alpha)
     end
     signal_connect(sliderB, "value-changed") do widget, others...
         global beta = GAccessor.value(sliderB)
         draw(can)
-        println(beta)
     end
     signal_connect(sliderD, "value-changed") do widget, others...
         global delta = GAccessor.value(sliderD)
         draw(can)
-        println(delta)
     end
+
+    grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
+    grid[1,2] = sliderB
+    grid[1,3] = sliderD
+    grid[2,1:3] = can
+    grid[5,1:3] = movingtrigo
 
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
-    push!(vbox, can)
+    set_gtk_property!(grid, :column_homogeneous, true)
+    set_gtk_property!(grid, :column_spacing, 15)
+    push!(vbox, grid, can, movingtrigo)
     set_gtk_property!(vbox, :expand, can, true)
 
     showall(win)

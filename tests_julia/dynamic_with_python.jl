@@ -71,6 +71,7 @@ end
 n = 150
 x = py"""Duffing"""()[1]
 y = py"""Duffing"""()[2]
+# lines(x, y)
 
 anim = @animate for i ∈ 1:n
     circleplot(x, y, i)
