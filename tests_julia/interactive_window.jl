@@ -125,6 +125,10 @@ function plotincanvas(h = 900, w = 800)
     signal_connect(sliderTrig, "value-changed") do widget, others...
         global coefTrig = GAccessor.value(sliderTrig)
         plottingTrig()
+        movingtrig = GtkImage("anim_gr_ref002.gif")
+        push!(vbox, grid, movingtrigo)
+        showall(win)
+          
     end
 
     grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
@@ -137,8 +141,8 @@ function plotincanvas(h = 900, w = 800)
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
     set_gtk_property!(grid, :column_homogeneous, true)
-    set_gtk_property!(grid, :column_spacing, 15)
-    push!(vbox, grid, can, movingtrigo)
+    set_gtk_property!(grid, :column_spacing, 15)    
+    push!(vbox, grid)
     set_gtk_property!(vbox, :expand, can, true)
 
     showall(win)
