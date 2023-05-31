@@ -63,7 +63,7 @@ end
 
 
 # PLOT STATIC FIGURE
-function plottingDuff()
+function static_plot()
     fig = Figure(resolution = (600, 450), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
@@ -76,19 +76,21 @@ function plottingDuff()
     fig
 end
 
-function plottingTrig()
-    p = Plots.plot([cos, cos], zeros(0), leg = false, xlims = (0, 2π), ylims = (-2, 2), resolution = (400, 400))
+function dynamic_plot()
+    abs = Duffing()[1]
+    ord = Duffing()[2]
+    p = Plots.plot([sin, cos], zeros(0), leg = false)
     anim = Animation()
-    for x = range(0, stop = 2π, length = 20)
-        push!(p, x, Float64[cos(x)+coefTrig, cos(x)*coefTrig])
+    for i in 1:8*NF:length(ord)
+        push!(p, abs[i], ord[i])
         frame(anim)
     end
-    gif(anim, "anim_gr_ref002.gif")
+    image = gif(anim, "anim_gr_ref002.gif")
 end
 
 
-histio() = show(io, MIME("image/png"), plottingDuff())
-plottingTrig()
+histio() = show(io, MIME("image/png"), static_plot())
+dynamic_plot()
 
 function plotincanvas(h = 900, w = 800)
     win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)) |> (sliderTrig = GtkScale(false, -1:0.1:1)))
@@ -112,23 +114,38 @@ function plotincanvas(h = 900, w = 800)
 
     signal_connect(sliderA, "value-changed") do widget, others...
         global alpha = GAccessor.value(sliderA)
+        empty!(movingtrigo)
+        dynamic_plot()
+        movingtrigo = GtkImage("anim_gr_ref002.gif")
+        grid[3,1] = movingtrigo
         draw(can)
+        showall(win)
     end
     signal_connect(sliderB, "value-changed") do widget, others...
         global beta = GAccessor.value(sliderB)
+        empty!(movingtrigo)
+        dynamic_plot()
+        movingtrigo = GtkImage("anim_gr_ref002.gif")
+        grid[3,1] = movingtrigo
         draw(can)
+        showall(win)
     end
     signal_connect(sliderD, "value-changed") do widget, others...
         global delta = GAccessor.value(sliderD)
+        empty!(movingtrigo)
+        dynamic_plot()
+        movingtrigo = GtkImage("anim_gr_ref002.gif")
+        grid[3,1] = movingtrigo
         draw(can)
+        showall(win)
+
     end
     signal_connect(sliderTrig, "value-changed") do widget, others...
         global coefTrig = GAccessor.value(sliderTrig)
         empty!(movingtrigo)
-        plottingTrig()
+        dynamic_plot()
         movingtrigo = GtkImage("anim_gr_ref002.gif")
         grid[3,1] = movingtrigo
-        push!(vbox, grid)
         showall(win)
           
     end
