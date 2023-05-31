@@ -64,7 +64,7 @@ end
 
 # PLOT STATIC FIGURE
 function static_plot()
-    fig = Figure(resolution = (600, 450), backgroundcolor = :white)
+    fig = Figure(resolution = (550, 400), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
         xlabel = "Speed",
@@ -79,7 +79,7 @@ end
 function dynamic_plot()
     abs = Duffing()[1]
     ord = Duffing()[2]
-    p = Plots.plot([sin, cos], zeros(0), leg = false)
+    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing oscillator", xlabel = "Speed", ylabel = "Acceleration")
     anim = Animation()
     for i in 1:8*NF:length(ord)
         push!(p, abs[i], ord[i])
@@ -93,12 +93,12 @@ histio() = show(io, MIME("image/png"), static_plot())
 dynamic_plot()
 
 function plotincanvas(h = 900, w = 800)
-    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)) |> (sliderTrig = GtkScale(false, -1:0.1:1)))
+    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)))
     grid = GtkGrid()
+    label = GtkLabel("My text")
     Gtk.G_.value(sliderA, 1)
     Gtk.G_.value(sliderB, 1)
     Gtk.G_.value(sliderD, 1)
-    Gtk.G_.value(sliderTrig, 0)
     movingtrigo = GtkImage("anim_gr_ref002.gif")
     can = GtkCanvas()
     
@@ -138,22 +138,13 @@ function plotincanvas(h = 900, w = 800)
         grid[3,1] = movingtrigo
         draw(can)
         showall(win)
-
-    end
-    signal_connect(sliderTrig, "value-changed") do widget, others...
-        global coefTrig = GAccessor.value(sliderTrig)
-        empty!(movingtrigo)
-        dynamic_plot()
-        movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[3,1] = movingtrigo
-        showall(win)
-          
     end
 
-    grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
-    grid[1,2] = sliderB
-    grid[1,3] = sliderD
-    grid[1,4] = sliderTrig
+    grid[1,1] = label
+    grid[1,2] = sliderA   # Cartesian coordinates, g[x,y]
+    grid[1,3] = sliderB
+    grid[1,4] = sliderD
+   
     grid[2,1] = can
     grid[3,1] = movingtrigo
 
