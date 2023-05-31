@@ -124,9 +124,11 @@ function plotincanvas(h = 900, w = 800)
     end
     signal_connect(sliderTrig, "value-changed") do widget, others...
         global coefTrig = GAccessor.value(sliderTrig)
+        empty!(movingtrigo)
         plottingTrig()
-        movingtrig = GtkImage("anim_gr_ref002.gif")
-        push!(vbox, grid, movingtrigo)
+        movingtrigo = GtkImage("anim_gr_ref002.gif")
+        grid[3,1] = movingtrigo
+        push!(vbox, grid)
         showall(win)
           
     end
