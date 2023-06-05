@@ -46,3 +46,6 @@ def fonction():
     xp = x[::NF]
     dotxp = dotx[::NF]  
     return(xp, dotxp)
+
+
+variable = 4

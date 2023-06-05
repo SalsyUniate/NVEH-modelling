@@ -9,7 +9,7 @@ using Plots
 py"""
 import numpy as np
 from math import pi, sin
-# from numba import jit
+from numba import jit
 
 xpit = 0.5e-3  
 omega0 = 121.0  
@@ -24,7 +24,7 @@ dt = Td / NF
 t = np.arange(NT*NF+1)*dt
 X0 = np.array([-4.0 * xpit, 3.0 * xpit * omega0])
 
-# @jit(nopython=True)
+@jit(nopython=True)
 def f(X, t):
     x, dotx = X
     dotX = np.zeros(2)
@@ -56,24 +56,17 @@ def Duffing():
     return(xp, dotxp)
 """
 
-@userplot CirclePlot
-@recipe function f(cp::CirclePlot)
-    x, y, i = cp.args
-    n = length(x)
-    inds = circshift(1:n, 1 - i)
-    linewidth --> range(0, 10, length = n)
-    seriesalpha --> range(0, 1, length = n)
-    aspect_ratio --> 1
-    label --> false
-    x[inds], y[inds]
-end
-
 n = 150
-x = py"""Duffing"""()[1]
-y = py"""Duffing"""()[2]
+xaxis = py"""Duffing"""()[1]
+yaxis = py"""Duffing"""()[2]
 # lines(x, y)
 
-anim = @animate for i ∈ 1:n
-    circleplot(x, y, i)
-end
-gif(anim, "anim_fps15.gif", fps = 15)
+fig = Figure(resolution = (550, 400), backgroundcolor = :white)
+ax = Axis(fig[1, 1],
+    title = "Duffing oscillator", 
+    xlabel = "Speed",
+    ylabel = "Acceleration"
+    )
+
+    lines!(ax, xaxis, yaxis)
+fig
