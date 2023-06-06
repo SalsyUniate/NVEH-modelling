@@ -1,11 +1,10 @@
 using GLMakie
 using Observables 
 using Plots
-# using Cairo
+using Cairo
 using Gtk
 
 const io = PipeBuffer()
-
 
 xpit = 0.5e-3 
 omega0 = 121.0
@@ -26,14 +25,10 @@ global coefTrig = 0
 global X01 = [-4.0 * xpit, 3.0 * xpit * omega0]
 global X02 = [-7 * xpit, 20.0 * omega0 * xpit]
 
-
-
 function f(X, t)
     x, dotx = X
     dotX = zeros(2)
     dotX[1] = dotx
-    # dotX[2] = -omega0/Q * dotx - omega0^2/2 * (x^3/xpit^2 - x) + Ad*sin(omegad*t)
-    # dotX[2] = @lift(- $(delta[]) * dotx - $(alpha[]) * x - $(beta[]) * x^3 + t)
     dotX[2] =(- delta * dotx - alpha * x - beta * x^3 + t)
     return dotX
 end 
@@ -60,39 +55,42 @@ function Duffing(X0)
     return (x, dotx)
 end 
 
-
 # PLOT STATIC FIGURE
 function static_plot()
-    fig = Figure(resolution = (550, 400), backgroundcolor = :white)
+    fig = Figure(resolution = (600, 450), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
-        xlabel = "Speed",
-        ylabel = "Acceleration"
+        xlabel = "Time",
+        ylabel = "Speed"
         )
+
         xaxis = Duffing(X01)[1]
         yaxis = Duffing(X01)[2]
         lines!(ax, xaxis, yaxis)
-    fig
+    fig  
 end
+
 
 function dynamic_plot(X01, X02)
     graph1 = Duffing(X01)[1]
     graph2 = Duffing(X02)[1]
-    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Speed", ylabel = "Acceleration")
+    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
-    for i in 1:8*NF:length(graph1)
+    for i in 1:50*NF:length(graph1)
         push!(p, i, [graph1[i], graph2[i]])
         frame(anim)
     end
     image = gif(anim, "anim_gr_ref002.gif")
 end  
 
-
 histio() = show(io, MIME("image/png"), static_plot())
 dynamic_plot(X01, X02)
 
 function plotincanvas(h = 900, w = 800)
-    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v) |> (sliderA = GtkScale(false, -10:10)) |> (sliderB = GtkScale(false, -10:10)) |> (sliderD = GtkScale(false, -10:10)))
+    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v))
+    (sliderA = GtkScale(false, -10:10))
+    (sliderB = GtkScale(false, -10:10))
+    (sliderD = GtkScale(false, -10:10))
     grid = GtkGrid()
     # label = GtkLabel("My text")
     Gtk.G_.value(sliderA, 1)
@@ -100,20 +98,6 @@ function plotincanvas(h = 900, w = 800)
     Gtk.G_.value(sliderD, 1)
     movingtrigo = GtkImage("anim_gr_ref002.gif")
     can = GtkCanvas()
-
-    cb = GtkComboBoxText()
-    choice1 = [-4.0 * xpit, 5.0 * xpit * omega0]
-    choice2 = [-3.0 * xpit, 4.0 * xpit * omega0]
-    choice3 = [-3.0 * xpit, 5.0 * xpit * omega0]
-    choice4 = [-7 * xpit, 20.0 * omega0 * xpit]
-    choices = ["[-4.0 * xpit, 5.0 * xpit * omega0]",
-        "[-3.0 * xpit, 4.0 * xpit * omega0]",
-        "[-3.0 * xpit, 5.0 * xpit * omega0]",
-        "[-7 * xpit, 20.0 * omega0 * xpit]"]
-    for choice in choices
-    push!(cb,choice)
-    end
-    set_gtk_property!(cb,:active,0)
     
     @guarded draw(can) do widget
         ctx = getgc(can)
@@ -124,11 +108,20 @@ function plotincanvas(h = 900, w = 800)
         paint(ctx)
     end
 
+    cb = GtkComboBoxText()
+    choice1 = [-4.0 * xpit, 5.0 * xpit * omega0]
+    choice2 = [-3.0 * xpit, 4.0 * xpit * omega0]
+    choice3 = [-3.0 * xpit, 5.0 * xpit * omega0]
+    choice4 = [-7 * xpit, 20.0 * omega0 * xpit]
+    choices = ["[-4.0 * xpit, 5.0 * xpit * omega0]", "[-3.0 * xpit, 4.0 * xpit * omega0]",  "[-3.0 * xpit, 5.0 * xpit * omega0]", "[-7 * xpit, 20.0 * omega0 * xpit]"]
+    for choice in choices
+        push!(cb,choice)
+    end
+    set_gtk_property!(cb,:active,0)
+
 
     signal_connect(cb, "changed") do widget, others...
         idx = get_gtk_property(cb, "active", Int)
-        # str = Gtk.bytestring( GAccessor.active_text(cb) ) 
-        # println("Active element is \"$str\" at index $idx")
         if idx == 0 
             global X02 = choice1
         elseif idx == 1
@@ -141,19 +134,16 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[3,1] = movingtrigo
+        grid[2,4] = movingtrigo
         draw(can)
         showall(win)
-
     end
-
-
     signal_connect(sliderA, "value-changed") do widget, others...
         global alpha = GAccessor.value(sliderA)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[3,1] = movingtrigo
+        grid[2,4] = movingtrigo
         draw(can)
         showall(win)
     end
@@ -162,7 +152,7 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[3,1] = movingtrigo
+        grid[2,4] = movingtrigo
         draw(can)
         showall(win)
     end
@@ -171,28 +161,30 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[3,1] = movingtrigo
+        grid[2,4] = movingtrigo
         draw(can)
         showall(win)
     end
 
-    # grid[1,1] = label
-    grid[1,2] = sliderA   # Cartesian coordinates, g[x,y]
-    grid[1,3] = sliderB
-    grid[1,4] = sliderD
+    grid[2,1:3] = cb
+    grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
+    grid[1,2] = sliderB
+    grid[1,3] = sliderD
    
-    grid[2,1] = can
-    grid[3,1] = movingtrigo
+    grid[1,4] = can
+    grid[2,4] = movingtrigo
 
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
+ 
+    push!(vbox, grid)
+    set_gtk_property!(vbox, :expand, true)
     set_gtk_property!(grid, :column_homogeneous, true)
-    set_gtk_property!(grid, :column_spacing, 15)    
-    push!(vbox, grid, cb)
-    set_gtk_property!(vbox, :expand, can, true)
+    set_gtk_property!(grid, :column_spacing, 15) 
 
     showall(win)
     show(can)
+
 end
 
 plotincanvas()

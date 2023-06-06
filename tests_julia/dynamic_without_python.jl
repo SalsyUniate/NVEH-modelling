@@ -69,13 +69,13 @@ end
 
 
 
-p = Plots.plot([sin, cos], zeros(0), leg = false, xlims = (0, 4), ylims = (-0.25, 0.75))
-anim = Animation()
-for x = range(0, stop = 2π, length = 20)
-    push!(p, Duffing()[1], Duffing()[2])
-    frame(anim)
-end
-gif(anim, "anim_gr_ref002.gif")
+# p = Plots.plot([sin, cos], zeros(0), leg = false, xlims = (0, 4), ylims = (-0.25, 0.75))
+# anim = Animation()
+# for x = range(0, stop = 2π, length = 20)
+#     push!(p, Duffing()[1], Duffing()[2])
+#     frame(anim)
+# end
+# gif(anim, "anim_gr_ref002.gif")
 
 
 
@@ -83,21 +83,22 @@ gif(anim, "anim_gr_ref002.gif")
 
 
 # PLOT STATIC FIGURE
-# fig = Figure(backgroundcolor = :white)
-# ax = Axis(fig[1, 1],
-#     title = "Duffing oscillator", 
-#     xlabel = "Speed",
-#     ylabel = "Acceleration"
-#     )
+fig = Figure(backgroundcolor = :white)
+ax = Axis(fig[1, 1],
+    title = "Duffing oscillator", 
+    xlabel = "Speed",
+    ylabel = "Acceleration"
+    )
 
-# xaxis = Duffing()[1]
-# yaxis = Duffing()[2]
-
+    xaxis = Duffing()[1]
+    yaxis = Duffing()[2]
+    lines!(xaxis, yaxis)
+fig
 # slide = Slider(fig[2, 1], range = 0:0.01:4.99, startvalue = 3)
 # lines!(ax, xaxis, yaxis)
-# # plot(xaxis, yaxis)
+# plot(xaxis, yaxis)
 
-# display(fig)
+
 
 
 
