@@ -20,7 +20,7 @@ labelB = GtkLabel("beta")
 labelD = GtkLabel("delta")
 
 can = GtkCanvas()
-dan = GtkImage("anim_gr_ref002.gif")
+dan = GtkImage("dan.gif")
 
 @guarded draw(can) do widget
     ctx = getgc(can)
@@ -34,7 +34,7 @@ end
 function refresh_gif(dan)
     empty!(dan)
     dynamic_plotting()
-    dan = GtkImage("anim_gr_ref002.gif")
+    dan = GtkImage("dan.gif")
     grid[2,4] = dan
     showall(win)
 end

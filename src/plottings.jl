@@ -1,7 +1,7 @@
 include("modelisation.jl")
 
 function static_plotting()
-    fig = Figure(resolution = (600,450), backgroundcolor = :white)
+    fig = Figure(resolution = (600,400), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
         xlabel = "Speed",
@@ -24,6 +24,6 @@ function dynamic_plotting()
         push!(p, abs[i], ord[i])
         frame(anim)
     end
-    gif(anim, "anim_gr_ref002.gif")
+    gif(anim, "dan.gif")
 end  
 dynamic_plotting()
