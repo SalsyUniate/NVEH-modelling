@@ -64,20 +64,22 @@ function static_plot()
         ylabel = "Speed"
         )
 
-        xaxis = Duffing(X01)[1]
-        yaxis = Duffing(X01)[2]
+        xaxis = Duffing(X01)[1]/xpit
+        yaxis = Duffing(X01)[2]/xpit
         lines!(ax, xaxis, yaxis)
     fig  
 end
 
 
 function dynamic_plot(X01, X02)
-    graph1 = Duffing(X01)[1]
-    graph2 = Duffing(X02)[1]
+    abs1 = Duffing(X01)[1]
+    graph1 = Duffing(X01)[2]
+    abs2 = Duffing(X02)[1]
+    graph2 = Duffing(X02)[2]
     p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
     for i in 1:50*NF:length(graph1)
-        push!(p, i, [graph1[i], graph2[i]])
+        push!(p, [abs1[1]/xpit, abs2[2]/xpit], [graph1[i]/(xpit*omega0), graph2[i]/(xpit*omega0)])
         frame(anim)
     end
     image = gif(anim, "anim_gr_ref002.gif")

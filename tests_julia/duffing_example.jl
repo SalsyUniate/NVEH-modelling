@@ -1,15 +1,18 @@
-using DynamicalSystems, Plots
+using InteractiveDynamics
+using DynamicalSystems, GLMakie
+using OrdinaryDiffEq
 
-ds = Systems.duffing(β = -1, ω = 1, f = 0.3, d = 0.2) # non-autonomous chaotic system
+diffeq = (alg = Tsit5(), adaptive = false, dt = 0.01)
 
-frames=120
-a = trajectory(ds, 1000.0, dt = 2π/frames, Ttr=20π) # every period T = 2π/ω
+ds = Systems.duffing()
 
-orbit_length = div(size(a)[1], frames)
-a = Matrix(a)
+u1 = [10.0,20.0]
+u3 = [20.0,10.0]
+u0s = [u1, u3]
 
-@gif for i in 1:frames
-    # orbit_points = i:frames:(orbit_length*frames)
-    Plots.scatter(a[i:frames:(orbit_length*frames), 1], a[i:frames:(orbit_length*frames), 2], markersize=1, html_output_format=:png, 
-        leg=false, framestyle=:none, xlims=extrema(a[:,1]), ylims=extrema(a[:,2]))
-end
+idxs = (1, 2)
+diffeq = (alg = Tsit5(), dt = 0.01, adaptive = false)
+
+figure = interactive_evolution(
+    ds, u0s; idxs, tail = 1000, diffeq
+)
