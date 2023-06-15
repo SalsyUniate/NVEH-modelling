@@ -5,7 +5,7 @@ ds = Systems.logistic()
 i = 1
 pvalues = 2:0.1:4
 ics = [rand() for m in 1:10]
-n = 50
+n = 1000
 Ttr = 500
 p_index = 1
 output = orbitdiagram(ds, i, p_index, pvalues; n=n, Ttr=Ttr)
