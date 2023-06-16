@@ -1,7 +1,7 @@
 using DynamicalSystems
 using PyPlot
 
-ds = Systems.duffing(β=-1, ω=1, f=0.3) # non-autonomous chaotic system
+#ds = Systems.duffing(β=-1, ω=1, f=0.3) # non-autonomous chaotic system
 
 xw = 0.5e-3
 omega0 = 121.0
@@ -32,7 +32,7 @@ end
 
 # u0 = [xw, 1.0e-3, 0.0]
 N=3
-u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
+u0s = [[-xw, x / N / 2, 1.0] for x = 0:N-1]
 
 
 
