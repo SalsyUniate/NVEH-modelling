@@ -11,7 +11,7 @@ Ad = 2.5
 
 p0 = [xpit, omega0, Q, omegad, Ad]
 
-
+u0 = [xpit, 0]
 function my_duffing(du, u, p, t)
     xpit, omega0, Q, omegad, Ad = p
     x = u[1]
