@@ -57,7 +57,7 @@ end
 
 # PLOT STATIC FIGURE
 function static_plot()
-    fig = Figure(resolution = (600, 450), backgroundcolor = :white)
+    fig = Figure(resolution = (600, 400), backgroundcolor = :white)
     ax = Axis(fig[1, 1],
         title = "Duffing oscillator", 
         xlabel = "Time",
@@ -72,14 +72,14 @@ end
 
 
 function dynamic_plot(X01, X02)
-    abs1 = Duffing(X01)[1]
-    graph1 = Duffing(X01)[2]
-    abs2 = Duffing(X02)[1]
-    graph2 = Duffing(X02)[2]
+    abs1 = Duffing(X01)[1]/xpit
+    graph1 = Duffing(X01)[2]/xpit
+    abs2 = Duffing(X02)[1]/xpit
+    graph2 = Duffing(X02)[2]/xpit
     p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
-    for i in 1:50*NF:length(graph1)
-        push!(p, [abs1[1]/xpit, abs2[2]/xpit], [graph1[i]/(xpit*omega0), graph2[i]/(xpit*omega0)])
+    for i in 1:1*NF:length(graph1)
+        push!(p, [abs1[i], abs2[i]], [graph1[i], graph2[i]])
         frame(anim)
     end
     image = gif(anim, "anim_gr_ref002.gif")
@@ -93,6 +93,10 @@ function plotincanvas(h = 900, w = 800)
     (sliderA = GtkScale(false, -10:10))
     (sliderB = GtkScale(false, -10:10))
     (sliderD = GtkScale(false, -10:10))
+
+    labelA = GtkLabel("alpha")
+    labelB = GtkLabel("beta")
+    labelD = GtkLabel("delta")
     grid = GtkGrid()
     # label = GtkLabel("My text")
     Gtk.G_.value(sliderA, 1)
@@ -136,7 +140,7 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[2,4] = movingtrigo
+        grid[3:4,4] = movingtrigo
         draw(can)
         showall(win)
     end
@@ -145,7 +149,7 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[2,4] = movingtrigo
+        grid[3:4,4] = movingtrigo
         draw(can)
         showall(win)
     end
@@ -154,7 +158,7 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[2,4] = movingtrigo
+        grid[3:4,4] = movingtrigo
         draw(can)
         showall(win)
     end
@@ -163,18 +167,22 @@ function plotincanvas(h = 900, w = 800)
         empty!(movingtrigo)
         dynamic_plot(X01, X02)
         movingtrigo = GtkImage("anim_gr_ref002.gif")
-        grid[2,4] = movingtrigo
+        grid[3:4,4] = movingtrigo
         draw(can)
         showall(win)
     end
 
-    grid[2,1:3] = cb
-    grid[1,1] = sliderA   # Cartesian coordinates, g[x,y]
-    grid[1,2] = sliderB
-    grid[1,3] = sliderD
+    grid[4,1:3] = cb
+    grid[2:3,1] = sliderA   # Cartesian coordinates, g[x,y]
+    grid[2:3,2] = sliderB
+    grid[2:3,3] = sliderD
+
+    grid[1,1] = labelA   # Cartesian coordinates, g[x,y]
+    grid[1,2] = labelB
+    grid[1,3] = labelD
    
-    grid[1,4] = can
-    grid[2,4] = movingtrigo
+    grid[1:2,4] = can
+    grid[3:4,4] = movingtrigo
 
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")

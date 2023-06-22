@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Contexte du stage}{4}{}%
+\contentsline {subsection}{\numberline {1.1}Présentation de l'organisme d'acueil}{4}{}%
+\contentsline {subsection}{\numberline {1.2}Sujet de stage}{4}{}%
+\contentsline {section}{\numberline {2}Contexte scientifique}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Les récupérateurs d'énergie}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Cahier des charges}{6}{}%
+\contentsline {section}{\numberline {3}Contenu du stage}{7}{}%
+\contentsline {subsection}{\numberline {3.1}Travail effectué}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.1}Interface graphique}{7}{}%
+\contentsline {subsubsection}{\numberline {3.1.2}Système dynamique}{10}{}%
+\contentsline {subsection}{\numberline {3.2}Ce qu'il reste à faire}{11}{}%
