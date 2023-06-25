@@ -104,6 +104,11 @@ function plotincanvas(h = 900, w = 800)
     Gtk.G_.value(sliderD, 1)
     movingtrigo = GtkImage("anim_gr_ref002.gif")
     can = GtkCanvas()
+
+    b_interactive_evolution = GtkButton("Interactive evolution")
+    b_poincare_scan = GtkButton("Poincare scan")
+
+
     
     @guarded draw(can) do widget
         ctx = getgc(can)
@@ -172,6 +177,18 @@ function plotincanvas(h = 900, w = 800)
         showall(win)
     end
 
+    function button_clicked_callback_1(widget)
+        include("tests_julia/bistable_interactiveevolution.jl")
+    end
+    function button_clicked_callback_2(widget)
+        include("tests_julia/bistable_scanpoincare.jl")
+    end
+
+
+    id = signal_connect(button_clicked_callback_1, b_interactive_evolution, "clicked")
+    id = signal_connect(button_clicked_callback_2, b_poincare_scan, "clicked")
+
+
     grid[4,1:3] = cb
     grid[2:3,1] = sliderA   # Cartesian coordinates, g[x,y]
     grid[2:3,2] = sliderB
@@ -184,6 +201,8 @@ function plotincanvas(h = 900, w = 800)
     grid[1:2,4] = can
     grid[3:4,4] = movingtrigo
 
+    grid[1,5] = b_interactive_evolution
+    grid[2,5] = b_poincare_scan
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
  
