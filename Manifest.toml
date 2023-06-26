@@ -2,7 +2,7 @@
 
 julia_version = "1.9.0"
 manifest_format = "2.0"
-project_hash = "63a21fd19fd99396962b92fa7d53a49783a1a5ca"
+project_hash = "3dac6e52da4f0c2faa3ba9505c394bf895babf1e"
 
 [[deps.ATK_jll]]
 deps = ["Artifacts", "Glib_jll", "JLLWrappers", "Libdl"]
@@ -541,6 +541,12 @@ version = "0.8.6"
 deps = ["ArgTools", "FileWatching", "LibCURL", "NetworkOptions"]
 uuid = "f43a241f-c20a-4ad4-852c-f6b1247861c6"
 version = "1.6.0"
+
+[[deps.DrWatson]]
+deps = ["Dates", "FileIO", "JLD2", "LibGit2", "MacroTools", "Pkg", "Random", "Requires", "Scratch", "UnPack"]
+git-tree-sha1 = "83aab57e1f14b36d2f3c02fbc0f95173f09683e1"
+uuid = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
+version = "2.12.5"
 
 [[deps.DynamicalBilliards]]
 deps = ["Distributed", "Elliptic", "InteractiveUtils", "LinearAlgebra", "Scratch", "StaticArrays", "Test"]
