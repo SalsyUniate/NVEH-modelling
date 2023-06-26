@@ -1,5 +1,5 @@
 using DrWatson
-@quickactivate "NonlinearDynamicsTextbook"
+@quickactivate "NVEH-modelling"
 include(srcdir("colorscheme.jl"))
 
 using DynamicalSystems, InteractiveDynamics
@@ -18,7 +18,6 @@ C0 = 1.05e-6
 R = 7.83e3
 K_harvesting_APA = 0.3e6
 M = 17.3e-3
-
 
 p0 = [xw, omega0, Q, omegad, Ad, alpha, C0, R, K_harvesting_APA, M]
 
@@ -64,9 +63,9 @@ diffeq = (alg=DP5(), dt=1e-3, adaptive=false)
 #     [0.0, 0.30266571044921875, 0.4205654433900762, 0.0], # periodic
 # ]
 
-N = 10
+N = 5
 u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
-trs = [trajectory(ds, 1000, u0; diffeq=diffeq)[:, SVector(1,2,3)] for u0 ∈ u0s]
+trs = [trajectory(ds, 100, u0; diffeq=diffeq)[:, SVector(1,2,3)] for u0 ∈ u0s]
 
 fig, ax3D, ax2D = brainscan_poincaresos(trs, 2; linekw = (transparency = false,))
 
