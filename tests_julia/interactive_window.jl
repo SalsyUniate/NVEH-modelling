@@ -149,6 +149,7 @@ function plotincanvas(h = 900, w = 800)
         draw(can)
         showall(win)
     end
+    
     signal_connect(sliderA, "value-changed") do widget, others...
         global alpha = GAccessor.value(sliderA)
         empty!(movingtrigo)

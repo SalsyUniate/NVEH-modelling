@@ -6,7 +6,9 @@ include("plottings.jl")
 const io = PipeBuffer()
 
 win = GtkWindow("Duffing oscillator", 900, 800) |> (vbox = GtkBox(:v))
+
 grid = GtkGrid()
+
 sliderA = GtkScale(false, -10:10)
 sliderB = GtkScale(false, -10:10)
 sliderD = GtkScale(false, -10:10)
@@ -22,6 +24,36 @@ labelD = GtkLabel("delta")
 can = GtkCanvas()
 dan = GtkImage("dan.gif")
 
+b_interactive_evolution = GtkButton("Interactive evolution")
+b_poincare_scan = GtkButton("Poincare scan")
+
+cb = GtkComboBoxText()
+choice1 = [-4.0 * xpit, 5.0 * xpit * omega0]
+choice2 = [-3.0 * xpit, 4.0 * xpit * omega0]
+choice3 = [-3.0 * xpit, 5.0 * xpit * omega0]
+choice4 = [-7 * xpit, 20.0 * omega0 * xpit]
+choices = ["[-4.0 * xpit, 5.0 * xpit * omega0]", "[-3.0 * xpit, 4.0 * xpit * omega0]",  "[-3.0 * xpit, 5.0 * xpit * omega0]", "[-7 * xpit, 20.0 * omega0 * xpit]"]
+for choice in choices
+    push!(cb,choice)
+end
+set_gtk_property!(cb,:active,0)
+
+signal_connect(cb, "changed") do widget, others...
+    idx = get_gtk_property(cb, "active", Int)
+    if idx == 0 
+        global X02 = choice1
+    elseif idx == 1
+        global X02 = choice2
+    elseif idx == 2 
+        global X02 = choice3
+    elseif idx == 3 
+        global X02 = choice4 
+    end 
+    refresh_gif(dan)
+    draw(can)
+    showall(win)
+end
+
 @guarded draw(can) do widget
     ctx = getgc(can)
     sleep(0.1)
@@ -33,9 +65,9 @@ end
 
 function refresh_gif(dan)
     empty!(dan)
-    dynamic_plotting()
+    dynamic_plotting(X01, X02)
     dan = GtkImage("dan.gif")
-    grid[2,4] = dan
+    grid[3:4,4] = dan
     showall(win)
 end
 
@@ -55,14 +87,31 @@ signal_connect(sliderD, "value-changed") do widget, others...
     refresh_gif(dan)
 end
 
-grid[1,1] = labelA
+function launch_poincare_scan(widget)
+    include("src/animations/poincare_scan.jl")
+end
+
+
+signal_connect(b_poincare_scan, "clicked") do widget, others...
+    println("got clicked")
+    include("src/animations/poincare_scan.jl")
+end
+
+    
+grid[4,1:3] = cb
+grid[2:3,1] = sliderA   # Cartesian coordinates, g[x,y]
+grid[2:3,2] = sliderB
+grid[2:3,3] = sliderD
+
+grid[1,1] = labelA   # Cartesian coordinates, g[x,y]
 grid[1,2] = labelB
 grid[1,3] = labelD
-grid[2,1] = sliderA
-grid[2,2] = sliderB
-grid[2,3] = sliderD
-grid[1,4] = can
-grid[2,4] = dan
+
+grid[1:2,4] = can
+grid[3:4,4] = dan
+
+grid[1,5] = b_interactive_evolution
+grid[2,5] = b_poincare_scan
 
 push!(vbox, grid)
 set_gtk_property!(vbox, :expand, true)

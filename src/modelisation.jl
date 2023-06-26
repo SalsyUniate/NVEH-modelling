@@ -4,22 +4,24 @@ using CairoMakie
 using Plots
 
 
-xpit = 0.5e-3  
-omega0 = 121.0  
+xpit = 0.5e-3 
+omega0 = 121.0
 Q = 87.0  
-fd = 50.0  
 Ad = 2.5  
 NT = 1000  
 NF = 100  
 fd = 25.0  
 omegad = 2.0 * pi * fd
-Td = 1/fd  
+Td = 1/fd 
 dt = Td / NF  
 t = (1:(NT*NF+1))*dt
-global X0 = [-4.0*xpit, 3.0*xpit*omega0]
+
+global delta = 1
 global alpha = 1
 global beta = 1
-global delta = 1
+global coefTrig = 0
+global X01 = [-4.0 * xpit, 3.0 * xpit * omega0]
+global X02 = [-7 * xpit, 20.0 * omega0 * xpit]
 
 
 function f(X, t)
@@ -47,7 +49,7 @@ function RK4(f, y0, t)
 end 
 
 
-function Duffing()
+function Duffing(X0)
     sol = RK4(f, X0, t)
     x = sol[:,1]
     dotx = sol[:,2]

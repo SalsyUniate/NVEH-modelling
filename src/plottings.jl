@@ -8,22 +8,25 @@ function static_plotting()
         ylabel = "Acceleration"
         )
 
-    xaxis = Duffing()[1]
-    yaxis = Duffing()[2]
+    xaxis = Duffing(X01)[1]
+    yaxis = Duffing(X01)[2]
     lines!(xaxis, yaxis)
     fig
 end
 show_static_plot() = show(io, MIME("image/png"), static_plotting())
 
-function dynamic_plotting()
-    abs = Duffing()[1]
-    ord = Duffing()[2]
-    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Position", ylabel = "Speed")
+function dynamic_plotting(X01, X02)
+    abs1 = Duffing(X01)[1]/xpit
+    graph1 = Duffing(X01)[2]/xpit
+    abs2 = Duffing(X02)[1]/xpit
+    graph2 = Duffing(X02)[2]/xpit
+    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
-    for i in 1:10*NF:length(ord)
-        push!(p, abs[i]/xpit, ord[i]/(xpit*omega0))
+    for i in 1:50*NF:length(graph1)
+        push!(p, [abs1[i], abs2[i]], [graph1[i], graph2[i]])
         frame(anim)
     end
-    gif(anim, "dan.gif")
+    image = gif(anim, "dan.gif")
 end  
-dynamic_plotting()
+
+dynamic_plotting(X01, X02)
