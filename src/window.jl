@@ -87,14 +87,19 @@ signal_connect(sliderD, "value-changed") do widget, others...
     refresh_gif(dan)
 end
 
-function launch_poincare_scan(widget)
+function launch_poincare_scan()
     include("src/animations/poincare_scan.jl")
 end
 
 
 signal_connect(b_poincare_scan, "clicked") do widget, others...
     println("got clicked")
-    include("src/animations/poincare_scan.jl")
+    launch_poincare_scan()
+end
+
+signal_connect(b_interactive_evolution, "clicked") do widget, others...
+    println("got clicked")
+    include("src/animations/bistable_interactive.jl")
 end
 
     
