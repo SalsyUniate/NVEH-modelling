@@ -1,0 +1,50 @@
+\begin{thebibliography}{1}
+
+\bibitem{lcharleuxHDR}
+Ludovic Charleux.
+\newblock {\em Modélisation et simulation de systèmes mécaniques pour la
+  mécatronique}.
+\newblock Habilitation \`a diriger des recherches mécanique, Université
+  Savoie Mont Blanc, Juin 2023.
+
+\bibitem{Datseris2018}
+George Datseris.
+\newblock Dynamicalsystems.jl: A julia software library for chaos and nonlinear
+  dynamics.
+\newblock {\em Journal of Open Source Software}, 3(23):598, mar 2018.
+
+\bibitem{huguet2018phd}
+Thomas Huguet.
+\newblock {\em Vers une meilleure exploitation des dispositifs de
+  r{\'e}cup{\'e}ration d’{\'e}nergie vibratoire bistables: Analyse et
+  utilisation de comportements originaux pour am{\'e}liorer la bande passante}.
+\newblock PhD thesis, Universit{\'e} de Lyon, 2018.
+
+\bibitem{kovsata2022harmonicbalance}
+Jan Ko{\v{s}}ata, Javier del Pino, Toni~Louis Heugel, and Oded Zilberberg.
+\newblock Harmonicbalance. jl: A julia suite for nonlinear dynamics using
+  harmonic balance.
+\newblock {\em SciPost Physics Codebases}, page 006, 2022.
+
+\bibitem{Liu2014}
+Weiqun Liu.
+\newblock {\em Conception d'un dispositif de récupération d'énergie
+  vibratoire large bande}.
+\newblock PhD thesis, 2014.
+\newblock Thèse de doctorat dirigée par Formosa, FabienAgbossou, Amen et
+  Badel, Adrien Sciences pour l'ingénieur Grenoble 2014.
+
+\bibitem{saint2022power}
+Camille Saint-Martin, Adrien Morel, Ludovic Charleux, E~Roux, Aya Benhemou, and
+  Adrien Badel.
+\newblock Power expectation as a unified metric for the evaluation of vibration
+  energy harvesters.
+\newblock {\em Mechanical Systems and Signal Processing}, 181:109482, 2022.
+
+\bibitem{csaintmartin2023preprint}
+Camille Saint-Martin, Adrien Morel, Ludovic Charleux, Emile Roux, David Gibus,
+  Aya Benhemou, and Adrien Badel.
+\newblock Optimized and robust orbit jump for nonlinear vibration energy
+  harvesting, 2023.
+
+\end{thebibliography}

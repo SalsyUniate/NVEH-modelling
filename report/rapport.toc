@@ -1,7 +1,7 @@
-\babel@toc {french}{}
+\babel@toc {french}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
 \contentsline {section}{\numberline {2}Contexte du stage}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Présentation de l'organisme d'acueil}{5}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Présentation de l'organisme d'accueil}{5}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Sujet de stage}{6}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Contexte scientifique}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Les récupérateurs d'énergie}{8}{subsection.3.1}%
@@ -10,8 +10,8 @@
 \contentsline {section}{\numberline {4}Contenu du stage}{13}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Travail effectué}{13}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Interface graphique}{13}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Systèmes dynamiques}{17}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Ce qu'il reste à faire}{26}{subsection.4.2}%
-\contentsline {section}{\numberline {5}Conclusion}{27}{section.5}%
-\contentsline {section}{\numberline {6}Bibliographie}{27}{section.6}%
-\contentsline {section}{\numberline {7}Annexes}{30}{section.7}%
+\contentsline {subsubsection}{\numberline {4.1.2}Systèmes dynamiques}{18}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Ce qu'il reste à faire}{22}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Conclusion}{24}{section.5}%
+\contentsline {section}{\numberline {6}Bibliographie}{25}{section.6}%
+\contentsline {section}{\numberline {7}Annexes}{28}{section.7}%
