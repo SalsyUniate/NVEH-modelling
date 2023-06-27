@@ -130,8 +130,8 @@ Enfin, une troisième partie explicitera le travail réalisé durant le stage en
 \subsection{Présentation de l'organisme d'accueil}
 
 L'Université Savoie Mont Blanc (USMB) est un établissement de 15 000 étudiants ouvert sur l'Europe et le monde.
-Les recherches sont menées par des laboratoires labellisés et reconnus, en partenariats étroits avec de grands organismes (CNRS, CEA, INRA), des organisations internationales (CERN) ou d'autres structures (INES, ”Institut de la Montagne”) à la pointe de l'innovation.
-Le SYMME (”Systèmes et Matériaux pour la Mécatronique”) est l'un de ces laboratoires.
+Les recherches sont menées par des laboratoires labellisés et reconnus, en partenariats étroits avec de grands organismes (CNRS, CEA, INRA), des organisations internationales (CERN) ou d'autres structures (INES, \og{}Institut de la Montagne\fg{}) à la pointe de l'innovation.
+Le SYMME (\og{}Systèmes et Matériaux pour la Mécatronique\fg{}) est l'un de ces laboratoires.
 Il a été créé en 2006 pour renforcer la position stratégique de l'université dans le domaine de la mécatronique.
 Il emploie environ 80 chercheurs, personnel administratif et étudiants.
 Ses recherches dans le domaine des microsources d'énergie concernent notamment le développement de structures électromécaniques innovantes aux échelles centimétrique et millimétrique, capables de convertir des énergies mécaniques en énergie électrique.
@@ -140,18 +140,17 @@ Plus particulièrement, ses activités de recherche portent sur les transducteur
 Ses travaux ont fait l'objet de nombreuses communications dans des journaux et des conférences de référence dans le domaine et sont reconnus par la communauté scientifique.
 
 
-Les travaux au laboratoire SYMME suivent deux axes principaux : "Matériaux, Systèmes et Instrumentation Intelligents", et "Qualité Industrielle".
-Ces deux thèmes sont eux-mêmes divisés en trois thèmes chacuns, respectivement : "Matériaux et nanomatériaux fonctionnels", "Instrumentation pour le médical", et "Valorisation de micro-sources d'énergies ambiantes" ; et "Caractérisation et modélisation thermomécanique des matériaux", "Optimisation produit-procédé" et "Optimisation des processus".
+Les travaux au laboratoire SYMME suivent deux axes principaux : \og{}Matériaux, Systèmes et Instrumentation Intelligents\fg{}, et \og{}Qualité Industrielle\fg{}.
+Ces deux thèmes sont eux-mêmes divisés en trois thèmes chacuns, respectivement : \og{}Matériaux et nanomatériaux fonctionnels\fg{}, \og{}Instrumentation pour le médical\fg{}, et \og{}Valorisation de micro-sources d'énergies ambiantes\fg{}; et \og{}Caractérisation et modélisation thermomécanique des matériaux\fg{}, \og{}Optimisation produit-procédé\fg{} et \og{}Optimisation des processus\fg{}.
 La figure \ref{fig:fig1} montre l'organisation du laboratoire SYMME.
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{organigramme.png}
-  \caption{Organisation du laboratoire SYMME}
+  \caption{Organisation du laboratoire SYMME.}
   \label{fig:fig1}
 \end{figure}
 
-
-C'est dans le thème "Matériaux, systèmes et instrumentation intelligents - valorisation de micro-sources d'énergies ambiantes" que s'inscrit ce stage.
+C'est dans le thème \og{}Matériaux, systèmes et instrumentation intelligents - valorisation de micro-sources d'énergies ambiantes\fg{} que s'inscrit ce stage.
 
 \subsection{Sujet de stage}
 
@@ -192,7 +191,7 @@ On les décompose en plusieurs sous systèmes comme le montre la figure \ref{fig
 \begin{enumerate}
   \item Un oscillateur mécanique dont la masse sismique est mise en mouvement dans le référenciel de l'oscillateur par l'accélération ambiante.
   \item Un transducteur électromécanique qui prélève une partie de l'énergie mécanique disponible dans l'oscillateur et l'injecte dans le circuit électrique.
-  \item Un système de stockage qui assure les tâches de conditionnement et de sockage de l'énergie.
+  \item Un système de stockage qui assure les tâches de conditionnement et de stockage de l'énergie.
 \end{enumerate}
 
 Certains systèmes reposent sur des oscillateurs linéaires d'un point de vue mécanique.
@@ -201,15 +200,14 @@ Les récupérateurs d'énergie vibratoire non linéaires ont une bande passante 
 Dans le contexte de ce stage, nous nous intéressons à une technologie particulière de récupérateurs d'énergie vibratoire.
 Celle-ci est notamment développée au laboratoire SYMME au travers de plusieurs projets de recherche.
 Ils sont dits bistables car leur énergie potentielle mécanique comporte deux puits qui correspondent à deux positions stables comme le montre la figure \ref{fig:lc_potential}.
-L'extraction de l'énérgie mécanique y est réalisée par des cellules piézoélectriques et alimentent une charge simple qui sera assimilée à une résistance.
-Dans ce qui suit, nous faisons aussi l'hypothèse que les oscillateurs sont soumis à une accélération ambiante $\ddot x_d$ sinusoïdale:
+L'extraction de l'énergie mécanique y est réalisée par des cellules piézoélectriques et alimentent une charge simple qui sera assimilée à une résistance, dénotée $R$.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width = .35\textwidth]{images/weiqun_lui_harvester}
   \end{center}
   \caption{Décomposition d'un système de récupération d'énergie vibratoire en plusieurs sous-systèmes.
-    Ce stage se concentre sur la partie \textit{Generator}, c'est-à-dire l'oscillateur mécanique et le transducteur électrique.
+    Ce stage se concentre sur la partie \og{}Generator\fg{}, c'est-à-dire l'oscillateur mécanique et le transducteur électromécanique.
     La charge électrique est considérée comme une simple charge résistive. Source:  \cite{Liu2014}.}
   \label{fig:wl_subsystems}
 \end{figure}
@@ -221,10 +219,10 @@ Dans ce qui suit, nous faisons aussi l'hypothèse que les oscillateurs sont soum
   \caption{Présentation des avantages des oscillateurs non-linéaires dans le cadre de la récupération d'énergie vibratoire.
     En haut à gauche, deux paysages vibratoires sont représentés par leur densité spectrale d'énergie.
     Le signal orange présente une grande accélération à basse fréquence et le bleu une accélération répartie sur une plus grande plage de fréquences avec un pic marqué.
-    Dans le cadre \og Linear solution \fg, les performances d'un oscillateur linéaires sont présentées.
+    Dans le cadre \og Linear solution \fg, les performances d'un oscillateur linéaire sont présentées.
     Celui-ci est optimisé pour le signal bleu et sa fréquence propre est donc ajustée à l'endroit du pic.
     La réponse en puissance est représentée sur la droite du cadre et la réponse bleue est très bonne.
-    Lorsque ce même oscillateur est soumis au sinal orange, la réponse est très mauvaise.
+    Lorsque ce même oscillateur est soumis au signal orange, la réponse est très mauvaise.
     En dessous, dans le cadre \og Wideband solution \fg, la même démarche est effectuée avec un oscillateur non-linéaire.
     Il est optimisé pour le signal bleu pour lequel il fournit une bonne puissance.
     Par contre, il s'adaptera aussi relativement bien au signal orange.
@@ -239,11 +237,12 @@ Dans ce qui suit, nous faisons aussi l'hypothèse que les oscillateurs sont soum
   \caption{Représentation schématique de l'énergie potentielle des systèmes de récupération d'énergie vibratoire développés au SYMME en fonction du déplacement de la masse $x$.
     Le potentiel présente deux minimums qui sont aussi des positions d'équilibre en $x = \pm x_w$.
     Un point col est présent en $x = 0$.
-    Les zones de basse énergie rouges représentent le lieu des orbites dites basses.
+    Les zones rouges de basse énergie représentent le lieu des orbites dites basses.
     La zone verte de haute énergie est celui des orbites hautes.  Source:  \cite{lcharleuxHDR}.}
   \label{fig:lc_potential}
 \end{figure}
 
+Dans ce qui suit, nous faisons aussi l'hypothèse que les oscillateurs sont soumis à une accélération ambiante $\ddot x_d$ sinusoïdale:
 \begin{equation}
   \ddot x_d(t) = A \sin (\omega_d t)
 \end{equation}
@@ -261,7 +260,7 @@ Le récupérateur dans son ensemble peut donc être décrit par les équations s
   \right.
   \label{eq:ode}
 \end{equation}
-
+Où $x$, $\dot{x}$ et $v$ représentent le déplacement et la vitesse de la masse et la tension générée par piézoélectricité.
 \noindent Et celles-ci peuvent être réécrites au premier ordre sous la forme suivante:
 
 \begin{equation}
@@ -275,13 +274,13 @@ Le récupérateur dans son ensemble peut donc être décrit par les équations s
   \label{eq:ode2}
 \end{equation}
 
-\noindent Les récupérateurs d'énergie non linéaires peuvent présenter plusieurs cycles limites stables appelés orbites et ce pour chaque conditions d'excitation $(f_d, A)$ .
+\noindent Les récupérateurs d'énergie non linéaires peuvent présenter plusieurs cycles limites stables appelés orbites et ce pour chaque condition d'excitation $(f_d, A)$ .
 L'existence des ces dernières est donc fonction la fréquence d'excitation $f_d$ et de l'amplitude des vibrations ambiantes $A$.
 Avec des conditions initiales données, le système converge naturellement vers l'une ou l'autre de ces orbites.
 Certaines de ces orbites, appelées orbites hautes, correspondent à un mouvement oscillatoire entre deux positions stables de la masse inertielle (voir figure \ref{fig:lc_potential}).
 D'autres, appelées orbites basses, correspondent à une situation où la masse inertielle oscille faiblement autour d'une seule position stable.
 Les orbites hautes sont beaucoup plus intéressantes pour la récupération d'énergie, parce qu'elles représentent une puissance récoltée plus importante.
-Les équations différentielles du système permettent de déterminer les différentes orbites cohabitant sur une fréquence donnée, mais aussi la stabilité desdites orbites grace à une simulation.
+Les équations différentielles du système permettent de déterminer les différentes orbites cohabitant sur une fréquence donnée, mais aussi la stabilité desdites orbites grâce à une simulation.
 Ainsi, pour les fréquences où différentes orbites basses et hautes cohabitent, il est intéressant de mettre en place une stratégie de saut d'orbite afin de forcer l'oscillateur à se positionner sur une orbite haute et récupérer plus d'énergie \cite{saint2022power}.
 
 
@@ -298,7 +297,7 @@ Il est important de trouver la méthode la moins coûteuse en énergie afin que 
 Notons que le niveau de flambement, donné par $x_w/ L$, sera indirectement modifié par la modification d'autres paramètres.
 Ainsi, en modifiant l'un de ces paramètres, il est possible de déformer l'énergie potentielle du système et ainsi le faire passer d'une orbite basse à une orbite haute.
 Afin d'expérimenter ces différentes stratégies, l'équipe de recherche a mis en place un prototype d'oscillateur bistable à ensemble masse-ressort flambé, permettant de modifier facilement certains de ces paramètres, et surtout d'étudier les performances d'énergie de récupération.
-Un schéma de ce prototype peut être vu en figure \ref{fig:prototype}.
+Une photo du prototype expérimental peut être vue en figure \ref{fig:prototype}.
 Ce système a l'avantage d'être à la fois compact et facile à mettre en place \cite{Liu2014}.
 
 
@@ -307,8 +306,8 @@ Ce système a l'avantage d'être à la fois compact et facile à mettre en place
     \includegraphics[width=.8\linewidth]{prototype_picture}
   \end{center}
 
-  \caption{Prototype de dernrière génération développé au SYMME dans le cadre du projet H2020 Fast-Smart.
-    Source \cite{csaintmartin2023preprint}.}
+  \caption{Prototype de dernière génération développé au SYMME dans le cadre du projet H2020 Fast-Smart.
+  Source \cite{csaintmartin2023preprint}.}
   \label{fig:prototype}
 \end{figure}
 
@@ -319,7 +318,7 @@ C'est donc également ce genre d'oscillateurs bistables qui sera utilisé dans l
   \begin{center}
     \includegraphics[width = 1\textwidth]{images/bistable}
   \end{center}
-  \caption{Modélisation électromécanique de l'oscillateur développé au Symme et présenté dans la figure \ref{fig:prototype}.
+  \caption{Modélisation électromécanique de l'oscillateur développé au SYMME et présenté dans la figure \ref{fig:prototype}.
     Source \cite{csaintmartin2023preprint}.}
   \label{fig:model}
 \end{figure}
@@ -344,7 +343,7 @@ En effet, son utilisation, qui se veut simple et intuitive, pourrait être une b
 
 
 Durant ce stage, différents outils de travail ont été utilisés.
-La totalité du code écrit se situe dans un repository Git, dont l'utilisation a permis de travailler en équipe, récupérer d'anciennes versions du code, et rendre l'application finale disponible.
+La totalité du code écrit se situe dans un repository Git, \href{https://github.com/SalsyUniate/NVEH-modelling}{NVEH-modelling}, dont l'utilisation a permis de travailler en équipe, récupérer d'anciennes versions du code, et rendre l'application finale disponible.
 La programmation a été réalisée sur l'éditeur de code Visual Studio Code, dont les extensions permettent d'utiliser de nombreux langages différents, ainsi que des outils tels que Git, de manière rapide et instinctive.
 Après plusieurs discussions, il a été décidé que la programmation serait faite en utilisant le langage Julia, plus rapide et performant que Python, et avec des librairies simplifiées sur la résolution d'équations différentielles et l'affichage de graphes interactifs.
 
@@ -360,23 +359,23 @@ Cependant, la modélisation initiale a servi pour faire différents essais d'int
 
 \subsubsection{Interface graphique}
 
-Il est vite devenu apparent que le paquetage \emph{Gtk.jl} permettait de créer des interfaces graphiques interactives assez facilement.
-La création de curseurs pour modifier les paramètres et de menus déroulants pour changer de condition initiale a été étudiée afin de faire une fenêtre permettant de modifier un graphique.
-Les graphiques ont été codés à l'aide du paquetage \emph{Plots.jl}.
-L'utilisation de macros permettent de créer des gif ou des animations en seulement une ligne de code.
+Il est vite devenu apparent que le paquetage \href{https://juliagraphics.github.io/Gtk.jl/latest/}{\emph{Gtk.jl}} permettait de créer des interfaces graphiques interactives assez facilement.
+La création de curseurs pour modifier les paramètres et de menus déroulants pour changer de condition initiale a été mise en place afin de réaliser une fenêtre permettant de modifier un graphique.
+Les graphiques ont été codés à l'aide du paquetage \href{https://docs.juliaplots.org/stable/}{\emph{Plots.jl}}.
+L'utilisation de macros permet de créer des gif ou des animations en seulement une ligne de code.
 Ces différentes fonctionnalités ont été utilisées pour réaliser une première fenêtre interactive.
 Cette première fenêtre simule  de deux manières la trajectoire d'un oscillateur répondant à l'équation:
 
 \begin{equation}
-  \ddot x = - \delta  \dot x - \alpha  x - \beta  x^3 + A \sin(\omega_d t)
+  \ddot x = - \delta  \dot x - \alpha  x - \beta  x^3 + t
 \end{equation}
 
 
-Avec $\delta$ le coefficient d'amortissement, $\alpha$ le coefficient de raideur linéaire, $\beta$ le coefficient de raideur non linéaire, et une excitation sinusoïdale d'amplitude $A$ et de pulsation $\omega_d$. Les valeurs d'origine des paramètres valent 1, avec une pulsation $\omega_d  = 50\pi$. La simulation a été faire sur une durée totale $\Delta t = 1e^5$ s.
+Avec $\delta$ le coefficient d'amortissement, $\alpha$ le coefficient de raideur linéaire, $\beta$ le coefficient de raideur non linéaire, et une excitation sinusoïdale d'amplitude $A$ et de pulsation $\omega_d$. Les valeurs par défaut des paramètres $\alpha$, $\beta$ et $\delta$ valent 1.
 
 
 La première fenêtre interactive créée ainsi peut être vue en figure  \ref{fig:interactive1}. 
-Le graphe de gauche est un graphe statique montrant le résultat de la simulation vue plus haut. Celui de droite montre le même résultat tracé en bleu, et une simulation similaire dont les conditions initiales sont différentes et peuvent être redéfinies par le menu déroulant situé dans le coin en haut à gauche de la fenêtre. 
+Le graphe de gauche est un graphe statique montrant le résultat de la simulation vue plus haut. Celui de droite montre le même résultat tracé en bleu, et une simulation similaire dont les conditions initiales sont différentes et peuvent être redéfinies par le menu déroulant situé dans le coin en haut à droite de la fenêtre. 
 C'est également un format gif, donc une animation qui se répète dans le temps. 
 À gauche de ce menu déroulant se trouvent trois curseurs correspondant respectivement aux paramètres $\alpha$, $\beta$ et $\delta$. 
 
@@ -385,7 +384,7 @@ C'est également un format gif, donc une animation qui se répète dans le temps
     \includegraphics[width=\linewidth]{interactivewindow_1.png}
   \end{center}
 
-  \caption{Fenêtre interactive créée avec le paquetage \emph{Gtk.jl} dans sa position par défaut, avec les graphes statique et dynamique, les curseurs avec leurs labels associés, et un menu déroulant servant à modifier les conditions initiales du tracé orange.}
+  \caption{Fenêtre interactive créée avec le paquetage \emph{Gtk.jl} dans sa position par défaut, avec les graphes statique et dynamique de la vitesse en fonction du temps, les curseurs avec leurs labels associés, et un menu déroulant servant à modifier les conditions initiales du tracé orange.}
   \label{fig:interactive1}
 \end{figure}
 
@@ -401,7 +400,7 @@ Ce graphe se crée en boucle : une fois arrivé à la fin du temps pris pour la 
 
 
 Les curseurs permettent de modifier les paramètres de l'équation différentielle et voir leur impact immédiatement sur les graphes.
-La figure \ref{fig:fig4} donne une vue de la fenêtre interactive avec l'un des paramètres modifiés. 
+La figure \ref{fig:fig4} donne une vue de la fenêtre interactive avec l'un des paramètres modifié. 
 
 
 \begin{figure}[H]
@@ -421,8 +420,8 @@ La figure \ref{fig:fig5} montre ce qu'une modification de ces conditions initial
 \end{figure}
 
 Une autre façon de créer des interfaces graphiques en Julia est d'utiliser l'extension Visual Studio Code \emph{Génie Builder}.
-Cette extension permet d'organiser une fenêtre graphique avec un système de \og cliqué-glissé \fg qui se construit automatiquement en générant un code html.
-Il est ainsi possible de mettre en place tous les éléments souhaités (graphes, boutons, curseurs, menus déroulants... mais aussi textes interactifs, par exemple) de manière intuitive et rapide.
+Cette extension permet d'organiser une fenêtre graphique avec un système de \og{} cliqué-glissé\fg{} qui se construit automatiquement en générant un code html.
+Il est ainsi possible de mettre en place tous les éléments souhaités (par exemple des graphes, boutons, curseurs et menus déroulants mais aussi des textes interactifs) de manière intuitive et rapide.
 À condition de maîtriser l'outil, cela peut permettre de gagner beaucoup de temps pour le côté purement graphique de l'application.
 Un fichier \emph{app.jl} contient le code de l'application en elle-même, c'est-à-dire le code des modélisations, calculs et autres programmations nécessaires.
 Il faut ensuite créer des variables spécifiques contenant, par exemple, le résultat d'un calcul.
@@ -436,12 +435,12 @@ Dans la colonne de droite, il est possible d'en modifier les propriétés, par e
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{geniebuilder_travail.png}
-  \caption{Fenêtre de travail de \emph{Génie Builder} permettant de créer une interface graphique par système de cliqué-glissé. La colonne de droite montre et permet de modifier les paramètres des éléments de la fenêtre, vus sur la droite.}
+  \caption{Fenêtre de travail de \emph{Génie Builder} permettant de créer une interface graphique par système de \og{}cliqué-glissé\fg{}. La colonne de droite montre et permet de modifier les paramètres des éléments de la fenêtre, vus dans le carré central.}
   \label{fig:fig6}
 \end{figure}
 
 La figure \ref{fig:fig7} montre l'aperçu de la fenêtre générée par le code de la figure \ref{fig:fig6}.
-Le curseur, interacif, et les deux messages qui se modifient lorsque le curseur est bougé, y sont présents, ainsi que le graphe avec les valeurs vues plus haut. 
+Le curseur, interactif, et les deux messages qui se modifient lorsque le curseur est bougé, y sont présents, ainsi que le graphe avec les valeurs vues plus haut. 
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{geniebuilder_result.png}
@@ -456,32 +455,54 @@ Ce système a été retenu comme une possibilité pour créer l'application fina
 En Julia, il existe de nombreux paquetages permettant de manipuler des systèmes dynamiques de manière simplifiée.
 Le premier qui sera abordé ici est le paquetage \href{https://nonlinearoscillations.github.io/HarmonicBalance.jl/stable/}{HarmonicBalance.jl} \cite{kovsata2022harmonicbalance}.
 Ce paquetage utilise la méthode de la balance harmonique pour calculer des solutions périodiques en passant par le domaine fréquentiel.
-Ainsi, par exemple, le graphe vu en figure \ref{fig:fig8} est l'affichage des solutions calculées par ce paquetage pour un oscillateur répondant à l'équation :
+La méthode de la balance harmonique consiste à trouver une solution périodique, notée $x$ que l’on suppose de la forme suivante :
+\begin{equation}
+  x(t) = u1 \cos(\omega t) + v1 \sin(\omega t)
+\end{equation}
+Ce paquetage permet par exemple de trouver des solutions pour un oscillateur dont la dynamique est décrite par l'équation : 
 \begin{equation}
 \ddot x(t) + \omega_0^2 x(t) + \alpha x(t)^3 + \eta x(t)^2 \dot x (t) = F \cos(\omega t)
+\label{eq:duffing}
 \end{equation}
+Ainsi, par exemple, le graphe vu en figure \ref{fig:fig8} présente l'amplitude des solutions en fonction de la fréquence angulaire.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.45\linewidth]{harmonicbalance.png}
-    \caption{Graphe montrant les solutions de l'équation calculées par la méthode de la balance harmonique.}
+    \caption{
+      Amplitude en fonction de la fréquence angulaire des solutions de  calculées par la méthode de la balance harmonique.
+      Source : \cite{kovsata2022harmonicbalance}
+      }
     \label{fig:fig8}
   \end{center}
 \end{figure}
 
-Pour l'obtenir, il faut déclarer l'équation différentielle étudiée ainsi que le paramètre variable souhaité en abscisse. Cette possibilité de graphe ne fait pas encore partie du projet actuel de l'application, mais elle est très intéressante et y sera probablement ajoutée plus tard.
+Pour l'obtenir, il faut déclarer l'équation différentielle étudiée ainsi que le paramètre variable souhaité en abscisse.
+Cette possibilité de graphe ne fait pas encore partie du projet actuel de l'application, mais elle est très intéressante et y sera probablement ajoutée plus tard.
 
-Comme vu plus tôt, Julia présente également une librairie de systèmes dynamiques déjà programmés grace au paquetage \href{https://juliadynamics.github.io/DynamicalSystems.jl/latest/}{DynamicalSystems.jl} \cite{Datseris2018}, et il est possible de créer un objet de ce type afin d'utiliser les fonctions qui utilisent des systèmes dynamiques pour de la modélisation, par exemple.
-Ainsi, même si un système dynamique modélisant un oscillateur de Duffing existe déjà en Julia, un nouveau système a été créé afin de coller au modèle d'oscillateur bistable utilisé par l'équipe de recherche, qui correspond à l'équation \ref{eq:ode}.
+Comme vu plus tôt, Julia présente également une librairie de systèmes dynamiques déjà programmés grace au paquetage \href{https://juliadynamics.github.io/DynamicalSystems.jl/latest/}{DynamicalSystems.jl} \cite{Datseris2018}.
+Il est possible de créer un objet de ce type afin d'utiliser les fonctions qui utilisent des systèmes dynamiques pour de la modélisation, par exemple.
+Ainsi, même si un système dynamique modélisant un oscillateur de Duffing existe déjà en Julia, un nouveau système a été créé afin de coller au modèle du récupérateur bistable utilisé par l'équipe de recherche, qui correspond à l'équation suivante : 
+\begin{equation}
+  \left\{
+  \begin{array}{ll}
+    \ddot{x} = -\dfrac{\omega_0^2}{2} \left( \dfrac{x^2}{x_w^2} - 1 \right) x - \dfrac{\omega_0}{Q} \dot{x} - 2 \dfrac{\alpha}{M L} x v + A_d \sin(2 \pi f_d t) \\[5mm]
+    \dot{v} =   2 \dfrac{\alpha}{LC_p} x \dot{x} - \dfrac{1}{R C_p} v
+  \end{array}
+  \right.
+\end{equation}
+On pourra par exemple modifier les valeurs des paramètres du système tels que la pulsation propre $\omega_0$, les paramètres de l'excitation $(A, f_d)$, les positions d'équilibre $\pm x_w$, etc... et voir leur influence sur la dynamique.
+
 
 L'utilisation de la fonction \emph{interactive\_evolution()}, du paquetage \href{https://juliadynamics.github.io/InteractiveDynamics.jl/dev/}{InteractiveDynamics.jl}, permet de prendre en arguments un système dynamique, et de le visualiser en temps réel.
-Dans le cas présent, la trajectoire de plusieurs oscillateurs bistables, dont les conditions initiales sont définies en avance, sont visualisées.
-La figure \ref{fig:fig9} représente l'initialisation d'une fenêtre créée ainsi. 
+Dans le cas présent, la trajectoire de plusieurs récupérateurs bistables, dont les conditions initiales sont définies en avance, sont visualisées.
+La figure \ref{fig:fig9} représente l'animation dans laquelle on affiche la vitesse $\dot{x}$ en fonction du déplacement $x$.
+Ce plan 2D est généralement appelé l'espace des phases.
 
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.8\linewidth]{interactiveevolution_0.png}
-    \caption{Fenêtre initiale créée par la fonction \emph{interactive\_evolution()} du paquetage \emph{InteractiveDynamics.jl}, montrant les conditions initiales des différents oscillateurs modélisés dans le plan.}
+    \caption{Fenêtre initiale créée par la fonction \emph{interactive\_evolution()} du paquetage \emph{InteractiveDynamics.jl}, montrant les conditions initiales des différents récupérateurs bistables modélisés dans le plan.}
     \label{fig:fig9}
   \end{center}
 \end{figure}
@@ -493,21 +514,31 @@ Contrairement aux animations au format gif vues plus haut, cette animation évol
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.8\linewidth]{interactiveevolution_1.png}
-    \caption{Fenêtre créée par la fonction \emph{interactive\_evolution()} du paquetage \emph{InteractiveDynamics.jl}, montrant les états des oscillateurs vus dans la figure précédente un peu plus tard dans le temps.}
+    \caption{Fenêtre créée par la fonction \emph{interactive\_evolution()} du paquetage \emph{InteractiveDynamics.jl}, montrant les états des oscillateurs vus dans la figure \ref{fig:fig9} un peu plus tard dans le temps.}
     \label{fig:fig10}
   \end{center}
 \end{figure}
 
-
-Selon les versions du paquetage, il est possible d'entrer d'autres arguments en paramètres de la fonction \emph{interactive\_evolution()} permettant de créer des curseurs supplémentaires.
+Selon les versions\footnote{La version v0.22.1 par exemple permet l'ajout des curseurs.} du paquetage de \href{https://juliadynamics.github.io/InteractiveDynamics.jl/dev/dynamicalsystems/}{InteractiveDynamics.jl}, il est possible d'entrer d'autres arguments en paramètres de la fonction \emph{interactive\_evolution()} permettant de créer des curseurs supplémentaires pour changer par exemple les valeurs des paramètres du système.
 Ces curseurs sont alors automatiquement liés à l'expression du système dynamique, et permettent de modifier des paramètres en temps réel.
 Ce genre de fonctionnalité permet de mettre en place une visualisation comme décrite dans le sujet de stage, et ce avec un code très simple et intuitif.
 En revanche, la version de paquetage nécessaire n'est pas compatible avec la plupart des autres paquetages ou fonctionnalités utilisées. 
+%PARTIE PAS CLAIRE : CURSEURS DES PARAMETRES ? 
 
 Une autre fonctionnalité du paquetage \emph{InteractiveDynamics.jl} permet de faire un scan en trois dimensions des sections de Poincaré d'un système.
+En dynamique des systèmes, les sections de Poincaré forment un outil de visualisation des trajectoires dans l'espace d'état.
+Elles permettent de simplifier l'étude d'un système de dimension $N$ en traçant les points traversant un hyperplan de dimension $N-1$.
+La figure \ref{fig:poincare} illustre la construction des sections de Poincaré dans le cas d'un système dynamique de dimension 3.
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.5]{poincare_section.png}
+  \caption{Illustration du principe de construction des sections de Poincaré. \href{https://journals.openedition.org/bibnum/1055}{Source}}
+  \label{fig:poincare}
+\end{figure}
 À nouveau, son utilisation est très simple, puisqu'il suffit de définir le système dynamique étudié et lancer la fonction \emph{brainscan\_poincaresos()}.
 Le résultat est une fenêtre interactive, avec sur la gauche une vision globale montrant la surface étudiée, sur la droite la surface de Poincaré scannée, et en bas un curseur permettant de modifier la position de la surface en question.
-Les figures \ref{fig:fig11} et \ref{fig:fig12} montrent ces résultats, avec différentes positions de la surface scannée. \\
+Les figures \ref{fig:fig11} et \ref{fig:fig12} montrent ces résultats, avec différentes positions de la surface scannée.
+Le graphique de gauche représente le plan 3D ($x, \dot{x}, v)$.\\
 
 
 \begin{figure}[H]
@@ -533,31 +564,30 @@ Il suffit de cliquer sur un endroit du graphe pour créer de nouvelles condition
 Deux curseurs permettent de définir le temps de simulation et la taille des points.
 La figure \ref{fig:fig17} montre la fenêtre créée ainsi avec les résultats de trois conditions initiales différentes. 
 
-
+L'animation telle que vue sur la figure \ref{fig:fig17} utilise non pas un récupérateur bistable comme vu précédemment, mais un système de Hénon Heiles, qui était l'exemple dans la documentation de la fonction.
+Un système de Hénon-Heiles représente le mouvement non linéaire d'une étoile autour d'un centre galactique. 
+Le fonctionnement avec un système bistable défini par l'équipe de travail n'a pas encore été mis en place.
 \begin{figure}[H]
   \begin{center}
     \includegraphics[width=0.7\linewidth]{poincaremap_2.png}
-    \caption{Carte des surfaces de Poincaré créée avec le paquetage \emph{DynamicalSystems.jl}, montrant les résultats correspondant à trois conditions initiales différentes, et différenciées par couleurs.}
+    \caption{Carte des surfaces de Poincaré associée au système de Hénon-Heiles créée avec le paquetage \emph{DynamicalSystems.jl}, montrant les résultats correspondant à trois conditions initiales différentes, et différenciées par couleurs.}
     \label{fig:fig17}
   \end{center}
 \end{figure}
 
-L'animation telle que vue sur la figure \ref{fig:fig17} utilise non pas un oscillateur bistable comme vu précédemment, mais un système de Hénon Heiles, qui était l'exemple pris dans l'explication de la fonction.
-Le fonctionnement avec un système bistable défini par l'équipe de travail n'a pas encore été mis en place.
-Un système de Hénon-Heiles représente le mouvement non linéaire d'une étoile autour d'un centre galactique. 
 
 Ces différentes animations sont très intéressantes pour le développement de l'application désirée, car elles permettent de modéliser et afficher des résultats rapidement, avec un effort minimal.
 Elles ne sont, en revanche, pas forcément toutes compatibles avec les systèmes de création d'interfaces vus plus haut, puisqu'elles ne peuvent pas être intégrées directement dedans, et que les différentes versions nécessaires ne sont pas forcément compatibles entre elles.
 
 
-\subsection{Ce qu'il reste à faire}
+\subsection{Perspectives}
 
 Afin de pouvoir utiliser des animations qui requièrent des versions de paquetages incompatibles les unes avec les autres, il a été décidé de faire une interface principale sur laquelle l'utilisateur pourrait décider quelle animation observer. 
 
 Le choix d'une animation spécifique se ferait à l'aide d'un clic sur un bouton.
 C'est ce clic qui pourrait commander la lecture du fichier contenant le code de l'animation en question.
 En haut de ce fichier, la commande \emph{@quickactivate()} pourrait permettre d'activer un environnement spécifique de Julia, contenant les versions de paquetage nécessaires au fonctionnement de l'animation souhaitée.
-Il faut donc mettre en place les différents environements nécessaires, et terminer de créer les animations afin de répondre au cahier des charges.
+Il faut donc mettre en place les différents environnements nécessaires, et terminer de créer les animations afin de répondre au cahier des charges.
 Par exemple, la carte de Poincaré interactive n'est pas encore codée pour utiliser un oscillateur bistable correspondant à celui utilisé par l'équipe de recherche. 
 
 Pour ce qui est de la fenêtre principale, elle sera probablement réalisée à l'aide du paquetage \emph{Gtk.jl}.
@@ -570,6 +600,24 @@ De plus, l'extension \emph{Génie Builder} a été peu utilisée jusqu'à mainte
 Si un cahier des charges a été établi, il a été fait avant de savoir exactement ce que Julia permettrait de réaliser.
 Il faudra donc vérifier au fur et à mesure de l'avancement ce que l'ensemble de l'équipe souhaite mettre en place précisément dans l'application.
 
+
+La figure \ref{fig:orgit} présente l'organisation actuelle des différents fichiers de l'application.\\
+
+
+\begin{itemize}
+  \item \emph{main.jl} : fichier principal qui sert à lancer l'application;
+  \item \emph{window.jl} : fichier qui crée la fenêtre interactive et qui définit la position des différents éléments qui y sont créés (par exemple les curseurs);
+  \item \emph{plottings.jl} : fichier qui construit les différents graphes;
+  \item \emph{modelisation.jl} : fichier qui contient les codes définissant les systèmes dynamiques étudiés;
+  \item \emph{animations} : dossier contenant les codes des différentes animations présentées dans ce rapport.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.35\textwidth]{organisation_julia.pdf}
+  \caption{Schéma de l'organisation des fichiers de l'application.}
+  \label{fig:orgit}
+\end{figure}
 \newpage
 
 \section{Conclusion}
