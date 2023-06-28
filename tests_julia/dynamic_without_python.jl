@@ -96,7 +96,7 @@ ax = Axis(fig[1, 1],
 fig
 # slide = Slider(fig[2, 1], range = 0:0.01:4.99, startvalue = 3)
 # lines!(ax, xaxis, yaxis)
-# plot(xaxis, yaxis)
+# Plots.plot(xaxis, yaxis)
 
 
 

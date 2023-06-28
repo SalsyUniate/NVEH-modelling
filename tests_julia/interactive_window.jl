@@ -78,7 +78,7 @@ function dynamic_plot(X01, X02)
     graph2 = Duffing(X02)[2]/xpit
     p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
-    for i in 1:50*NF:length(graph1)
+    for i in 1:4*NF:length(graph1)
         push!(p, [abs1[i], abs2[i]], [graph1[i], graph2[i]])
         frame(anim)
     end
@@ -89,7 +89,7 @@ histio() = show(io, MIME("image/png"), static_plot())
 dynamic_plot(X01, X02)
 
 function plotincanvas(h = 900, w = 800)
-    win = GtkWindow("Duffing oscillator", h, w) |> (vbox = GtkBox(:v))
+    win = GtkWindow("NVEH modelling", h, w) |> (vbox = GtkBox(:v))
     (sliderA = GtkScale(false, -10:10))
     (sliderB = GtkScale(false, -10:10))
     (sliderD = GtkScale(false, -10:10))
@@ -105,8 +105,8 @@ function plotincanvas(h = 900, w = 800)
     movingtrigo = GtkImage("anim_gr_ref002.gif")
     can = GtkCanvas()
 
-    b_interactive_evolution = GtkButton("Interactive evolution")
-    b_poincare_scan = GtkButton("Poincare scan")
+    # b_interactive_evolution = GtkButton("Interactive evolution")
+    # b_poincare_scan = GtkButton("Poincare scan")
 
 
     
@@ -178,16 +178,16 @@ function plotincanvas(h = 900, w = 800)
         showall(win)
     end
 
-    function button_clicked_callback_1(widget)
-        include("tests_julia/bistable_interactiveevolution.jl")
-    end
-    function button_clicked_callback_2(widget)
-        include("tests_julia/bistable_scanpoincare.jl")
-    end
+    # function button_clicked_callback_1(widget)
+    #     include("tests_julia/bistable_interactiveevolution.jl")
+    # end
+    # function button_clicked_callback_2(widget)
+    #     include("tests_julia/bistable_scanpoincare.jl")
+    # end
 
 
-    id = signal_connect(button_clicked_callback_1, b_interactive_evolution, "clicked")
-    id = signal_connect(button_clicked_callback_2, b_poincare_scan, "clicked")
+    # id = signal_connect(button_clicked_callback_1, b_interactive_evolution, "clicked")
+    # id = signal_connect(button_clicked_callback_2, b_poincare_scan, "clicked")
 
 
     grid[4,1:3] = cb
@@ -202,8 +202,8 @@ function plotincanvas(h = 900, w = 800)
     grid[1:2,4] = can
     grid[3:4,4] = movingtrigo
 
-    grid[1,5] = b_interactive_evolution
-    grid[2,5] = b_poincare_scan
+    # grid[1,5] = b_interactive_evolution
+    # grid[2,5] = b_poincare_scan
 
     # id = signal_connect((w) -> draw(can), slideA, "value-changed")
  

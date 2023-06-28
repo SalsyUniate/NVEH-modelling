@@ -33,7 +33,6 @@ function bistable_harvester(du, u, p, t)
     return nothing
 end
 
-function launching_poincare_scan()
 
     # u0 = [xw, 1.0e-3, 0.0, omegad]
     u0 = [xw, 1.0e-3, 0.0]
@@ -54,7 +53,3 @@ function launching_poincare_scan()
 
     fig, ax3D, ax2D = brainscan_poincaresos(trs, 2; linekw = (transparency = false,))
 
-
-end
-
-launching_poincare_scan()

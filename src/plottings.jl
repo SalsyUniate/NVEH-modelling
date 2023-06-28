@@ -22,7 +22,7 @@ function dynamic_plotting(X01, X02)
     graph2 = Duffing(X02)[2]/xpit
     p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
     anim = Animation()
-    for i in 1:50*NF:length(graph1)
+    for i in 1:7*NF:length(graph1)
         push!(p, [abs1[i], abs2[i]], [graph1[i], graph2[i]])
         frame(anim)
     end

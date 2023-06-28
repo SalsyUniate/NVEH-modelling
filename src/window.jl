@@ -5,7 +5,7 @@ include("plottings.jl")
 
 const io = PipeBuffer()
 
-win = GtkWindow("Duffing oscillator", 900, 800) |> (vbox = GtkBox(:v))
+win = GtkWindow("NVEH modelling", 900, 800) |> (vbox = GtkBox(:v))
 
 grid = GtkGrid()
 
@@ -24,8 +24,8 @@ labelD = GtkLabel("delta")
 can = GtkCanvas()
 dan = GtkImage("dan.gif")
 
-b_interactive_evolution = GtkButton("Interactive evolution")
-b_poincare_scan = GtkButton("Poincare scan")
+# b_interactive_evolution = GtkButton("Interactive evolution")
+# b_poincare_scan = GtkButton("Poincare scan")
 
 cb = GtkComboBoxText()
 choice1 = [-4.0 * xpit, 5.0 * xpit * omega0]
@@ -49,7 +49,7 @@ signal_connect(cb, "changed") do widget, others...
     elseif idx == 3 
         global X02 = choice4 
     end 
-    refresh_gif(dan)
+    refresh_gif(dan, X02)
     draw(can)
     showall(win)
 end
@@ -63,7 +63,7 @@ end
     paint(ctx)
 end
 
-function refresh_gif(dan)
+function refresh_gif(dan, X02)
     empty!(dan)
     dynamic_plotting(X01, X02)
     dan = GtkImage("dan.gif")
@@ -74,33 +74,32 @@ end
 signal_connect(sliderA, "value-changed") do widget, others...
     global alpha = GAccessor.value(sliderA)
     draw(can)
-    refresh_gif(dan)
+    refresh_gif(dan, X02)
 end
 signal_connect(sliderB, "value-changed") do widget, others...
     global beta = GAccessor.value(sliderB)
     draw(can)
-    refresh_gif(dan)
+    refresh_gif(dan, X02)
 end
 signal_connect(sliderD, "value-changed") do widget, others...
     global delta = GAccessor.value(sliderD)
     draw(can)
-    refresh_gif(dan)
+    refresh_gif(dan, X02)
 end
 
-function launch_poincare_scan()
-    include("src/animations/poincare_scan.jl")
-end
+# function launch_poincare_scan()
+#     include("src/animations/poincare_scan.jl")
+# end
 
+# signal_connect(b_poincare_scan, "clicked") do widget, others...
+#     println("got clicked")
+#     launch_poincare_scan()
+# end
 
-signal_connect(b_poincare_scan, "clicked") do widget, others...
-    println("got clicked")
-    launch_poincare_scan()
-end
-
-signal_connect(b_interactive_evolution, "clicked") do widget, others...
-    println("got clicked")
-    include("src/animations/bistable_interactive.jl")
-end
+# signal_connect(b_interactive_evolution, "clicked") do widget, others...
+#     println("got clicked")
+#     include("src/animations/bistable_interactive.jl")
+# end
 
     
 grid[4,1:3] = cb
@@ -115,8 +114,8 @@ grid[1,3] = labelD
 grid[1:2,4] = can
 grid[3:4,4] = dan
 
-grid[1,5] = b_interactive_evolution
-grid[2,5] = b_poincare_scan
+# grid[1,5] = b_interactive_evolution
+# grid[2,5] = b_poincare_scan
 
 push!(vbox, grid)
 set_gtk_property!(vbox, :expand, true)

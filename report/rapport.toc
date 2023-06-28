@@ -6,12 +6,12 @@
 \contentsline {section}{\numberline {3}Contexte scientifique}{8}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Les récupérateurs d'énergie}{8}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Les sauts d'orbite}{10}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}La place de ce stage}{12}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Contenu du stage}{13}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Travail effectué}{13}{subsection.4.1}%
+\contentsline {subsection}{\numberline {3.3}La place de ce stage}{11}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Contenu du stage}{12}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Travail effectué}{12}{subsection.4.1}%
 \contentsline {subsubsection}{\numberline {4.1.1}Interface graphique}{13}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Systèmes dynamiques}{18}{subsubsection.4.1.2}%
-\contentsline {subsection}{\numberline {4.2}Ce qu'il reste à faire}{22}{subsection.4.2}%
+\contentsline {subsubsection}{\numberline {4.1.2}Systèmes dynamiques}{17}{subsubsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.2}Perspectives}{22}{subsection.4.2}%
 \contentsline {section}{\numberline {5}Conclusion}{24}{section.5}%
 \contentsline {section}{\numberline {6}Bibliographie}{25}{section.6}%
 \contentsline {section}{\numberline {7}Annexes}{28}{section.7}%
