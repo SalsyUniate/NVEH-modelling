@@ -25,31 +25,31 @@ function bistable_harvester(du, u, p, t)
 
     du[1] = u[2]
     du[2] = -(omega0^2 / 2) * (u[1]^2 / xw^2 - 1.0) * u[1]
-        -omega0 / Q * u[2]
-        -2.0 * alpha / (M * L) * u[1] * u[3]
-        +Ad * sin(omegad * t)
+    -omega0 / Q * u[2]
+    -2.0 * alpha / (M * L) * u[1] * u[3]
+    +Ad * sin(omegad * t)
     du[3] = 2.0 * alpha / (L * C0) * u[1] * u[2]
-        -u[3] / (R * C0)
+    -u[3] / (R * C0)
     return nothing
 end
 
 
-    # u0 = [xw, 1.0e-3, 0.0, omegad]
-    u0 = [xw, 1.0e-3, 0.0]
 
-    ds = ContinuousDynamicalSystem(bistable_harvester, u0, p0)
-    # ds = ContinuousDynamicalSystem(adim_harvester, u0, p0)
+# u0 = [xw, 1.0e-3, 0.0, omegad]
+u0 = [xw, 1.0e-3, 0.0]
 
-    diffeq = (alg=DP5(), dt=1e-3, adaptive=false)
-    # u0s = [
-    #     [0.0, -0.25, 0.42, 0.0], # chaotic
-    #     [0.0, 0.1, 0.5, 0.0], # quasiperiodic
-    #     [0.0, 0.30266571044921875, 0.4205654433900762, 0.0], # periodic
-    # ]
+ds = ContinuousDynamicalSystem(bistable_harvester, u0, p0)
+# ds = ContinuousDynamicalSystem(adim_harvester, u0, p0)
 
-    N = 5
-    u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
-    trs = [trajectory(ds, 100, u0; diffeq=diffeq)[:, SVector(1,2,3)] for u0 ∈ u0s]
+diffeq = (alg=DP5(), dt=1e-3, adaptive=false)
+# u0s = [
+#     [0.0, -0.25, 0.42, 0.0], # chaotic
+#     [0.0, 0.1, 0.5, 0.0], # quasiperiodic
+#     [0.0, 0.30266571044921875, 0.4205654433900762, 0.0], # periodic
+# ]
 
-    fig, ax3D, ax2D = brainscan_poincaresos(trs, 2; linekw = (transparency = false,))
+N = 5
+u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
+trs = [trajectory(ds, 100, u0; diffeq=diffeq)[:, SVector(1,2,3)] for u0 ∈ u0s]
 
+fig, ax3D, ax2D = brainscan_poincaresos(trs, 2; linekw = (transparency = false,))

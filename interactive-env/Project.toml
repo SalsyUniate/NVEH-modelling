@@ -1,7 +1,6 @@
-name = "NVEH-modelling"
-
 [deps]
 DynamicalSystems = "61744808-ddfa-5f27-97ff-6e42cc95d634"
 GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
+Gtk = "4c0ca9eb-093a-5379-98c5-f87ac0bbbf44"
 InteractiveDynamics = "ec714cd0-5f51-11eb-0b6e-452e7367ff84"
 OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"

@@ -46,9 +46,9 @@ u0s = [[xw, x/N/2, 0.0] for x=0:N-1]
 idxs = (1, 2)
 diffeq = (alg=Tsit5(), dt=0.01, adaptive=false)
 
-figure = interactive_evolution(
-    ds, u0s; idxs, tail=1000, diffeq
-)
+# figure = interactive_evolution(
+#     ds, u0s; idxs, tail=1000, diffeq
+# )
 
 # Use the `slidervals` observable to plot fixed points
 # lorenzfp(ρ,β) = [
@@ -57,5 +57,5 @@ figure = interactive_evolution(
 # ]
 
 # fpobs = lift(lorenzfp, slidervals[2], slidervals[3])
-# ax = content(figure[1,1][1,1])
-# scatter!(ax, fpobs; markersize = 5000, marker = :diamond, color = :black)
+ax = content(figure[1,1][1,1])
+scatter!(ax; markersize = 5000, marker = :diamond, color = :black)
