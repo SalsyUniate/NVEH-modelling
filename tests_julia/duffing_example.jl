@@ -27,11 +27,11 @@ ds = ContinuousDynamicalSystem(my_duffing, u0, p0)
 N=2
 u0s = [[xpit, x/N/2] for x=0:N-1]
 
-idxs = (1, 2)
-diffeq = (alg=Tsit5(), dt=0.002, adaptive=false)
+idxs = [1, 2]
+diffeq = (alg=Tsit5(), dt=0.00002, abstol = 1.0e-6, reltol = 1.0e-6, adaptive=false)
 
-figure = interactive_evolution(
-    ds, u0s; idxs, tail=1000, diffeq
+figure, obs, step, paramvals = interactive_evolution(
+    ds, u0s; ps, idxs, tail=1000, pnames
 )
 
 # Use the `slidervals` observable to plot fixed points
