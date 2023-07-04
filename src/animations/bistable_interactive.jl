@@ -13,7 +13,7 @@ R = 7.83e3
 # K_harvesting_APA = 0.3e6
 M = 17.3e-3
 L=25e-3
-
+global x = 0
 
 function bistable_harvester(du, u, p, t)
     xw, omega0, Q, omegad, Ad, alpha, C0, R, M, L = p
@@ -28,8 +28,6 @@ function bistable_harvester(du, u, p, t)
         +Ad * sin(omegad * t)
     du[3] = 2.0 * alpha / (L * C0) * x * dotx
     - v / (R * C0)
-
-
     return nothing
 end
 
@@ -42,7 +40,7 @@ end
 function linear_harvester(du, u, p, t)
     xw, omega0, Q, omegad, Ad, alpha, C0, R, M, L = p
     # L = (xw / omega0) * sqrt(4 * K_harvesting_APA / M)
-    x = u[1]
+    global x = u[1]
     dotx = u[2]
     v = u[3]
     du[1] = dotx
@@ -52,7 +50,6 @@ function linear_harvester(du, u, p, t)
         +Ad * sin(omegad * t)
     du[3] = 2.0 * alpha / (L * C0) * xw * dotx
         -v / (R * C0)
-
     return nothing
 end
 
@@ -61,10 +58,10 @@ u0 = [xw, 1.0e-3, 0.0]
 
 ps = Dict(
     1 => 0.7*p0[1]:0.1e-3:3.0*p0[1],
-    # 2 => 10:0.1:50,
+    2 => 100:0.1:200,
     # 3 => 1:0.01:10.0,
 )
-pnames = Dict(1 => "xw")
+pnames = Dict(1 => "xw", 2 => "omega0")
 
 # limite du plan 3D (x, dotx, v)
 lims = (
@@ -91,24 +88,17 @@ figure, obs, step, paramvals = interactive_evolution(
     ds, u0s; ps, idxs, tail=1000, pnames
 )
 
-# Use the `slidervals` observable to plot fixed points
-# lorenzfp(ρ, β) = [
-#     Point3f(sqrt(β * (ρ - 1)), sqrt(β * (ρ - 1)), ρ - 1),
-#     Point3f(-sqrt(β * (ρ - 1)), -sqrt(β * (ρ - 1)), ρ - 1),
-# ]
 
-# fpobs = lift(lorenzfp, slidervals[2], slidervals[3])
-# ax = content(figure[1, 1][1, 1])
-# scatter!(ax, fpobs; markersize=5000, marker=:diamond, color=:black)
 ax = Axis(figure[1,1][1,2]; xlabel = "points", ylabel = "distance")
 function distance_from_symmetry(u)
-    Ec = 0.5*M*u[2]^2
+    Ec = (M*omega0^2 / (8*xw^2)) * (x+xw)^2 * (x-xw)^2
     return Ec
 end
 for (i, ob) in enumerate(obs)
-    x = range(0, 100, length=1000) 
-    y = sin.(x)* p0[1]
-    lines!(ax, x, y; color = JULIADYNAMICS_COLORS[i])
+    ord = lift(abs -> distance_from_symmetry.(abs).*i/i, ob)
+    abs = 1:length(ord[])
+
+    lines!(ax, abs, ord; color = JULIADYNAMICS_COLORS[i])
 end
 ax.limits = ((0, 1000), (0, 12))
 figure
