@@ -1,7 +1,10 @@
 using Gtk
 using Cairo
 
-include("animations/bistable_interactive.jl")
+include("animations/bistable_harvester.jl")
+include("animations/duffing_oscillator.jl")
+include("animations/linear_harvester.jl")
+
 
 const io = PipeBuffer()
 
@@ -9,20 +12,27 @@ win = GtkWindow("NVEH modelling", 900, 800) |> (vbox = GtkBox(:v))
 
 grid = GtkGrid()
 
-b_interactive_evolution = GtkButton("Interactive evolution")
+b_bistable = GtkButton("Bistable harvester :/")
+b_linear = GtkButton("Linear harvester :/")
+b_duffing = GtkButton("Duffing oscillator :)")
 
 
+signal_connect(b_bistable, "clicked") do widget, others...
+    bistable_trajectory()
+end
 
-signal_connect(b_interactive_evolution, "clicked") do widget, others...
+signal_connect(b_duffing, "clicked") do widget, others...
+    duffing_trajectory()
+end
 
-    figure = interactive_evolution(
-        ds, u0s; idxs, tail=1000, diffeq
-    )
+signal_connect(b_linear, "clicked") do widget, others...
+    linear_trajectory()
 end
 
 
-
-grid[1,1] = b_interactive_evolution
+grid[1,1] = b_bistable
+grid[1,2] = b_linear
+grid[1,3] = b_duffing
 
 
 push!(vbox, grid)
