@@ -3,7 +3,7 @@ using DynamicalSystems, GLMakie, OrdinaryDiffEq
 
 function bistable_trajectory()
     xw = 0.5e-3
-    omega0 = 121.0
+    omega0 = 1
     Q = 87.0
     fd = 50.0
     omegad = 2.0 * pi * fd
@@ -38,10 +38,15 @@ function bistable_trajectory()
 
     ps = Dict(
         1 => 0.7*p0[1]:0.1e-3:3.0*p0[1],
-        2 => 100:0.1:200,
-        # 3 => 1:0.01:10.0,
+        2 => 0:0.1e-3:2, 
+        3 => 50:0.1e-3:150,
+        4 => 100:0.1:500
     )
-    pnames = Dict(1 => "xw", 2 => "omega0")
+    pnames = Dict(1 => "xw", 
+        2 => "omega0", 
+        3 => "Q",
+        4 => "omegad"
+    )
 
     # limite du plan 3D (x, dotx, v)
     lims = (
@@ -64,7 +69,7 @@ function bistable_trajectory()
         ds, u0s; ps, idxs, tail=1000, pnames
     )
 
-    ax = Axis(figure[1,1][1,2]; xlabel = "points", ylabel = "distance")
+    ax = Axis(figure[1,1][1,2]; xlabel = "Position", ylabel = "Énergie potentielle")
     function distance_from_symmetry(u)
         Ec = (M*omega0^2 / (8*xw^2)) * (x+xw)^2 * (x-xw)^2
         return Ec
@@ -75,8 +80,7 @@ function bistable_trajectory()
 
         lines!(ax, abs, ord; color = JULIADYNAMICS_COLORS[i])
     end
-    ax.limits = ((0, 1000), (0, 12))
+    ax.limits = ((0, 1000), (0, 0.001))
     figure
 end
 
-bistable_trajectory()

@@ -10,6 +10,7 @@ function duffing_trajectory()
     gamma = 0.3    # damping
     delta = 0.3    # amplitude of driving force
     omega = 1.2    # frequency of driving force
+    global x = 0
 
     p0 = [alpha, beta, gamma, delta, omega]
     ps = Dict(
@@ -40,7 +41,24 @@ function duffing_trajectory()
 
     idxs = [1, 2]
 
-    figure = interactive_evolution(ds, u0s; ps, idxs, pnames)
+    figure, obs, step, paramvals = interactive_evolution(ds, u0s; ps, idxs, pnames)
+
+
+    ax = Axis(figure[1,1][1,2]; xlabel = "Position", ylabel = "Énergie potentielle")
+    function potential_energy(u)
+        Ec = 0.5*alpha*x^2 + 0.25 * beta * x^4
+        return Ec
+    end
+    for (i, ob) in enumerate(obs)
+        ord = lift(abs -> potential_energy.(abs).*i/i, ob)
+        abs = 1:length(ord[])
+
+        lines!(ax, abs, ord; color = JULIADYNAMICS_COLORS[i])
+    end
+    ax.limits = ((0, 1000), (-1.5, 0))
+    figure
+
+
 end 
 
 

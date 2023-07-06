@@ -1,5 +1,6 @@
 using Gtk
 using Cairo
+using LaTeXStrings
 
 include("animations/bistable_harvester.jl")
 include("animations/duffing_oscillator.jl")
@@ -12,9 +13,11 @@ win = GtkWindow("NVEH modelling", 900, 800) |> (vbox = GtkBox(:v))
 
 grid = GtkGrid()
 
-b_bistable = GtkButton("Bistable harvester :/")
-b_linear = GtkButton("Linear harvester :/")
-b_duffing = GtkButton("Duffing oscillator :)")
+# l_bistable = GtkLabel(L"$\alpha$")
+# GAccessor.markup(l_bistable,"""$$ {J(\beta)} $$""")
+b_bistable = GtkButton("Bistable harvester")
+b_linear = GtkButton("Linear harvester")
+b_duffing = GtkButton("Duffing oscillator")
 
 
 signal_connect(b_bistable, "clicked") do widget, others...
@@ -30,6 +33,7 @@ signal_connect(b_linear, "clicked") do widget, others...
 end
 
 
+# grid[1,1] = l_bistable
 grid[1,1] = b_bistable
 grid[1,2] = b_linear
 grid[1,3] = b_duffing
