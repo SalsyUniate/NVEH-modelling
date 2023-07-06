@@ -74,8 +74,10 @@ u0s = [[xw, x/N/2, 0.0] for x=0:N-1]
 
 idxs = [1, 2]
 
+plotkwargs = (; :linestyle => nothing)
+
 figure, obs, step, paramvals = interactive_evolution(
-    ds, u0s; ps, idxs, tail=1000, tsidxs=nothing, pnames
+    ds, u0s; ps, idxs, tail=1000, tsidxs=nothing, pnames, plotkwargs
 )
 
 bistable_equilibriums(xw) = [Point2f(-xw, 0.0), Point2f(xw, 0.0)]
