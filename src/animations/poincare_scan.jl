@@ -1,4 +1,6 @@
 using DrWatson
+@quickactivate "specific-env"
+
 using DynamicalSystems, InteractiveDynamics
 using OrdinaryDiffEq
 import GLMakie
@@ -38,8 +40,10 @@ end
 # u0 = [xw, 1.0e-3, 0.0, omegad]
 u0 = [xw, 1.0e-3, 0.0]
 
-ds = ContinuousDynamicalSystem(bistable_harvester, u0, p0)
+# ds = ContinuousDynamicalSystem(bistable_harvester, u0, p0)
 # ds = ContinuousDynamicalSystem(adim_harvester, u0, p0)
+
+ds = Systems.henonheiles()
 
 diffeq = (alg=DP5(), dt=1e-3, adaptive=false)
 # u0s = [
@@ -49,7 +53,7 @@ diffeq = (alg=DP5(), dt=1e-3, adaptive=false)
 # ]
 
 N = 5
-u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
-trs = [trajectory(ds, 100, u0; diffeq=diffeq)[:, SVector(1,2,3)] for u0 ∈ u0s]
+u0s = [[xw, x / N / 2, 1.0, 1.0] for x = 0:N-1]
+trs = [trajectory(ds, 100, u0)[:, SVector(1,2,3)] for u0 ∈ u0s]
 
 fig, ax3D, ax2D = brainscan_poincaresos(trs, 2; linekw = (transparency = false,))
