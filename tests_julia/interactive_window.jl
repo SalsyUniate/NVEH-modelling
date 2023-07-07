@@ -18,8 +18,8 @@ Td = 1/fd
 dt = Td / NF  
 t = (1:(NT*NF+1))*dt
 # X0 = [-4.0*xpit, 3.0*xpit*omega0]
-global delta = 1
-global alpha = 1
+global delta = 2
+global alpha = 0
 global beta = 1
 global coefTrig = 0
 global X01 = [-4.0 * xpit, 3.0 * xpit * omega0]
@@ -29,7 +29,7 @@ function f(X, t)
     x, dotx = X
     dotX = zeros(2)
     dotX[1] = dotx
-    dotX[2] =(- delta * dotx - alpha * x - beta * x^3 + t)
+    dotX[2] =(- delta * dotx - alpha * x - beta * x^3 + Ad * sin(omegad*t))
     return dotX
 end 
 
@@ -64,25 +64,25 @@ function static_plot()
         ylabel = "Speed"
         )
 
-        xaxis = Duffing(X01)[1]/xpit
-        yaxis = Duffing(X01)[2]/xpit
+        xaxis = Duffing(X01)[1]
+        yaxis = Duffing(X01)[2]
         lines!(ax, xaxis, yaxis)
     fig  
 end
 
 
 function dynamic_plot(X01, X02)
-    abs1 = Duffing(X01)[1]/xpit
-    graph1 = Duffing(X01)[2]/xpit
-    abs2 = Duffing(X02)[1]/xpit
-    graph2 = Duffing(X02)[2]/xpit
-    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Duffing osillator", xlabel = "Time", ylabel = "Speed")
+    abs1 = Duffing(X01)[1]
+    graph1 = Duffing(X01)[2]
+    abs2 = Duffing(X02)[1]
+    graph2 = Duffing(X02)[2]
+    p = Plots.plot([sin, cos], zeros(0), leg = false, title = "Oscillateur de Duffing", xlabel = "Position", ylabel = "Vitesse")
     anim = Animation()
-    for i in 1:4*NF:length(graph1)
-        push!(p, [abs1[i], abs2[i]], [graph1[i], graph2[i]])
+    for i in 1:NF:length(graph1)
+        push!(p, [abs1[i]], [graph1[i]])
         frame(anim)
     end
-    image = gif(anim, "anim_gr_ref002.gif")
+    gif(anim, "anim_gr_ref002.gif", fps = 150)
 end  
 
 histio() = show(io, MIME("image/png"), static_plot())
