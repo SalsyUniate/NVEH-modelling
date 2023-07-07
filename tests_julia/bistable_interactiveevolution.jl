@@ -84,6 +84,7 @@ bistable_equilibriums(xw) = [Point2f(-xw, 0.0), Point2f(xw, 0.0)]
 equilibrium_observables = lift(bistable_equilibriums, paramvals[1])
 ax_phase_plane = content(figure[1,1][1,1])
 scatter!(ax_phase_plane, equilibrium_observables; markersize=16, marker=:diamond, color=:black)
+supertitle  = Label(figure[0,:], "THIS IS A TITLE", fontsize = 30)
 
 ax = Axis(figure[1, 1][1, 2]; xlabel="Position, x", ylabel="Énergie potentielle, Ep")
 
@@ -93,4 +94,4 @@ for (i, ob) in enumerate(obs)
     scatter!(ax, x_, y; color=JULIADYNAMICS_COLORS[i])
 end
 
-ax.limits = ((0, length(y[])), (minimum(y[]), maximum(y[])*1e-1))
+ax.limits = ((0, 1000), (-0.1, 0.1))

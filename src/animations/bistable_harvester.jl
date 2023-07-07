@@ -78,20 +78,36 @@ function bistable_trajectory()
     figure, obs, step, paramvals = interactive_evolution(
         ds, u0s; ps, idxs, tail=1000, tsidxs=nothing, pnames
     )
+    
 
     #PLOT EQUILIBRIUM POSITIONS
     bistable_equilibriums(xw) = [Point2f(-xw, 0.0), Point2f(xw, 0.0)]
     equilibrium_observables = lift(bistable_equilibriums, paramvals[1])
     ax_phase_plane = content(figure[1, 1][1, 1])
     scatter!(ax_phase_plane, equilibrium_observables; markersize=16, marker=:diamond, color=:black)
+    supertitle  = Label(figure[0,:][1,1:2], L"""\ddot{x} = -\frac{\omega_0^2}{2} \left( \frac{x^2}{x_w^2} - 1 \right) x - \frac{\omega_0}{Q} \dot{x} - 2 \frac{\alpha}{M L} x v + A_d \sin(2 \pi f_d t) """, fontsize = 20)
+    title = Label(figure[0,:][2,1:2], L""" \dot{v} =   2 \frac{\alpha}{LC_p} x \dot{x} - \frac{1}{R C_p} v""", fontsize = 20)
 
-    ax = Axis(figure[1,1][1,2]; xlabel = L"\text{Position}, x", ylabel = L"\text{Énergie potentielle}, E_p [J]")
+    ax = Axis(figure[1,1][1,2]; 
+        xlabel = L"\text{Position}, x", 
+        ylabel = L"\text{Énergie potentielle}, E_p [J]")
 
     for (i, ob) in enumerate(obs)
         y = lift(x -> potential_energy_state.(x), ob)
         x_ = 1:length(y[])
         scatter!(ax, x_, y; color=JULIADYNAMICS_COLORS[i])
     end
-    ax.limits = ((0, length(y[])), (minimum(y[]), maximum(y[])*1e-1))
+    ax.limits = ((0, 1000), (-0.1, 0.1))
+
+
+    # ax2 = Axis(figure[1,1][2,2])
+
+    # text!(L"\alpha^2")
+     
+
+
+
+
 end
 
+bistable_trajectory()

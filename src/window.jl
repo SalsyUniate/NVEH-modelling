@@ -13,7 +13,7 @@ win = GtkWindow("NVEH modelling", 900, 800) |> (vbox = GtkBox(:v))
 
 grid = GtkGrid()
 
-# l_bistable = GtkLabel(L"$\alpha$")
+l_bistable = GtkLabel("Trajectoire en temps réel d'un oscillateur bistable :")
 # GAccessor.markup(l_bistable,"""$$ {J(\beta)} $$""")
 b_bistable = GtkButton("Bistable harvester")
 b_linear = GtkButton("Linear harvester")
@@ -37,10 +37,11 @@ signal_connect(b_harmonic, "clicked") do widget, others...
 end
 
 # grid[1,1] = l_bistable
-grid[1,1] = b_bistable
-grid[1,2] = b_linear
-grid[1,3] = b_duffing
-grid[1,4] = b_harmonic
+grid[1,1] = l_bistable
+grid[2,1] = b_bistable
+grid[2,2] = b_linear
+grid[2,3] = b_duffing
+grid[2,4] = b_harmonic
 
 push!(vbox, grid)
 set_gtk_property!(vbox, :expand, true)

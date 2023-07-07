@@ -1,12 +1,14 @@
 name = "NVEH-modelling"
 
 [deps]
+AbstractPlotting = "537997a7-5e4e-5d89-9595-2241ea00577e"
 CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 DrWatson = "634d3b9d-ee7a-5ddf-bec9-22491ea816e1"
 DynamicalSystems = "61744808-ddfa-5f27-97ff-6e42cc95d634"
 GLMakie = "e9467ef8-e4e7-5192-8a1a-b1aee30e663a"
 Gtk = "4c0ca9eb-093a-5379-98c5-f87ac0bbbf44"
 InteractiveDynamics = "ec714cd0-5f51-11eb-0b6e-452e7367ff84"
+Javis = "78b212ba-a7f9-42d4-b726-60726080707e"
 LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
 OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"
