@@ -2,6 +2,7 @@
 using InteractiveDynamics
 using DynamicalSystems, GLMakie
 using OrdinaryDiffEq
+using LaTeXStrings
 
 function harmonic_trajectory()
     #SETUP
@@ -16,7 +17,7 @@ function harmonic_trajectory()
         3 => 0.1:0.1:0.5   
     )
 
-    pnames = Dict(1 => "mass", 2 => "spring constant", 3 => "damping coefficient")
+    pnames = Dict(1 => L"m", 2 => L"k", 3 => L"d")
 
     u0 = [1.0, 0.0] 
 
@@ -37,5 +38,9 @@ function harmonic_trajectory()
 
     idxs = [1, 2]
 
-    figure = interactive_evolution(ds, u0s; ps, idxs, pnames)
+    figure, obs, steps, paramvals = interactive_evolution(ds, u0s; ps, idxs, pnames)
+
+    supertitle  = Label(figure[0,:], L"""\ddot{x} = - \frac{k}{m} x - \frac{d}{m} \dot{x}""", fontsize = 25)
+
+
 end

@@ -109,5 +109,3 @@ function bistable_trajectory()
 
 
 end
-
-bistable_trajectory()
