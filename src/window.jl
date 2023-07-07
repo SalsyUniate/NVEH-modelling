@@ -1,5 +1,4 @@
 using Gtk
-using Cairo
 using LaTeXStrings
 
 include("animations/bistable_harvester.jl")

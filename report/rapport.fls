@@ -1,9 +1,9 @@
-PWD /home/cloe/Documents/NVEH-modelling/report
+PWD /home/cloe/Documents/Polytech/stages/stageFI4/NVEH-modelling/report
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/cloe/Documents/NVEH-modelling/report/rapport.tex
+INPUT /home/cloe/Documents/Polytech/stages/stageFI4/NVEH-modelling/report/rapport.tex
 OUTPUT rapport.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/article.cls
