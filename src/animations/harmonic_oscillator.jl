@@ -43,4 +43,21 @@ function harmonic_trajectory()
     supertitle  = Label(figure[0,:], L"""\ddot{x} = - \frac{k}{m} x - \frac{d}{m} \dot{x}""", fontsize = 25)
 
 
+    ax = Axis(figure[1,1][1,2]; 
+        xlabel = L"\text{Position}, x", 
+        ylabel = L"\text{Énergie potentielle}, E_p [J]")
+
+    function potential_energy(u)
+        Ep = p0[2] / (2*p0[1]) * u[1]^2
+        return Ep
+    end
+    for (i, ob) in enumerate(obs)
+        y = lift(x -> potential_energy.(x), ob)
+        x_ = 1:length(y[])
+
+        scatter!(ax, x_, y; color = JULIADYNAMICS_COLORS[i])
+    end
+    ax.limits = ((0, 1000), (-1.5, 0))
+    figuree
+
 end

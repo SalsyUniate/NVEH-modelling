@@ -65,7 +65,3 @@ function duffing_trajectory()
 
 end 
 
-
-
-
-duffing_trajectory()

@@ -100,12 +100,4 @@ function bistable_trajectory()
     ax.limits = ((0, 1000), (-0.1, 0.1))
 
 
-    # ax2 = Axis(figure[1,1][2,2])
-
-    # text!(L"\alpha^2")
-     
-
-
-
-
 end
