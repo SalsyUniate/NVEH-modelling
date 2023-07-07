@@ -29,7 +29,7 @@ b_harmonic = GtkButton("Oscillateur harmonique")
 l_dimless = GtkLabel("Trajectoire en temps réel d'un générateur sans dimension :")
 b_dimless = GtkButton("Générateur sans dimension")
 
-pic = GtkImage("dan.gif")
+pic = GtkImage("joli.png")
 
 signal_connect(b_bistable, "clicked") do widget, others...
     bistable_trajectory()
