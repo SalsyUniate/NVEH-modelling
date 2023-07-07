@@ -1,45 +1,15 @@
-using InteractiveDynamics
-using DynamicalSystems, GLMakie
-using OrdinaryDiffEq
+using DynamicalSystems, Plots
 
-xpit = 0.5e-3  
-omega0 = 121.0 
-Q = 87.0  
-fd = 50.0  
-omegad = 2.0 * pi * fd
-Ad = 2.5 
+ds = Systems.duffing(β = -1, ω = 1, f = 0.3) # non-autonomous chaotic system
 
-p0 = [xpit, omega0, Q, omegad, Ad]
+frames=120
+a = trajectory(ds, 100000.0, dt = 2π/frames, Ttr=20π) # every period T = 2π/ω
 
-u0 = [xpit, 0]
-function my_duffing(du, u, p, t)
-    xpit, omega0, Q, omegad, Ad = p
-    x = u[1]
-    dotx = u[2]
-    du[1] = dotx
-    du[2] = -(omega0^2 / 2) * (x^2 / xpit^2 - 1.0) * x - omega0 / Q * dotx + Ad * sin(omegad * t)
-    return nothing
+orbit_length = div(size(a)[1], frames)
+a = Matrix(a)
+
+@gif for i in 1:frames
+    orbit_points = i:frames:(orbit_length*frames)
+    scatter(a[i:frames:(orbit_length*frames), 1], a[i:frames:(orbit_length*frames), 2], markersize=1, html_output_format=:png, 
+        leg=false, framestyle=:none, xlims=extrema(a[:,1]), ylims=extrema(a[:,2]))
 end
-
-
-ds = ContinuousDynamicalSystem(my_duffing, u0, p0)
-
-N=2
-u0s = [[xpit, x/N/2] for x=0:N-1]
-
-idxs = [1, 2]
-diffeq = (alg=Tsit5(), dt=0.00002, abstol = 1.0e-6, reltol = 1.0e-6, adaptive=false)
-
-figure, obs, step, paramvals = interactive_evolution(
-    ds, u0s; ps, idxs, tail=1000, pnames
-)
-
-# Use the `slidervals` observable to plot fixed points
-# lorenzfp(ρ,β) = [
-#     Point3f(sqrt(β*(ρ-1)), sqrt(β*(ρ-1)), ρ-1),
-#     Point3f(-sqrt(β*(ρ-1)), -sqrt(β*(ρ-1)), ρ-1),
-# ]
-
-# fpobs = lift(lorenzfp, slidervals[2], slidervals[3])
-# ax = content(figure[1,1][1,1])
-# scatter!(ax, fpobs; markersize = 5000, marker = :diamond, color = :black)
