@@ -10,7 +10,7 @@ function duffing_trajectory()
     gamma = 0.3    # damping
     delta = 0.3    # amplitude of driving force
     omega = 1.2    # frequency of driving force
-    global x = 0
+
 
     p0 = [alpha, beta, gamma, delta, omega]
     ps = Dict(
@@ -20,16 +20,16 @@ function duffing_trajectory()
         4 => 0.1:0.1:1.0,  
         5 => 0.8:0.1:1.5   
     )
-    pnames = Dict(1 => "alpha", 2 => "beta", 3 => "gamma", 4 => "delta", 5 => "omega")
+    pnames = Dict(1 => L"\alpha", 2 => L"\beta", 3 => L"\gamma", 4 => L"\delta", 5 => L"\omega")
 
     u0 = [1.0, 0.0]  # initial conditions (position, velocity)
 
     function duffing!(du, u, p, t)
         alpha, beta, gamma, delta, omega = p
         x = u[1]
-        v = u[2]
-        du[1] = v
-        du[2] = -alpha*x - beta*x^3 - gamma*v + delta*cos(omega*t)
+        dotx = u[2]
+        du[1] = dotx
+        du[2] = -alpha*x - beta*x^3 - gamma*dotx + delta*cos(omega*t)
         return nothing
     end
 
@@ -43,23 +43,25 @@ function duffing_trajectory()
 
     figure, obs, step, paramvals = interactive_evolution(ds, u0s; ps, idxs, pnames)
 
+    supertitle  = Label(figure[0,:], L"""\ddot{x} = - \alpha x - \beta x^3 - \gamma \dot{x} + \delta \cos(\omega t)""", fontsize = 25)
 
-    ax = Axis(figure[1,1][1,2]; xlabel = "Position", ylabel = "Énergie potentielle")
+    ax = Axis(figure[1,1][1,2]; 
+        xlabel = L"\text{Position}, x", 
+        ylabel = L"\text{Énergie potentielle}, E_p [J]")
+
     function potential_energy(u)
-        Ec = 0.5*alpha*x^2 + 0.25 * beta * x^4
+        Ec = 0.5*p0[1]*u[1]^2 + 0.25 * p0[2] * u[1]^4
         return Ec
     end
     for (i, ob) in enumerate(obs)
-        ord = lift(abs -> potential_energy.(abs).*i/i, ob)
-        abs = 1:length(ord[])
+        y = lift(x -> potential_energy.(x), ob)
+        x_ = 1:length(y[])
 
-        lines!(ax, abs, ord; color = JULIADYNAMICS_COLORS[i])
+        scatter!(ax, x_, y; color = JULIADYNAMICS_COLORS[i])
     end
     ax.limits = ((0, 1000), (-1.5, 0))
     figure
 
 
 end 
-
-
 

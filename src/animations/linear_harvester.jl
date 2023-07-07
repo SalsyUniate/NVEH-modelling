@@ -14,12 +14,12 @@ function linear_trajectory()
     # K_harvesting_APA = 0.3e6
     M = 17.3e-3
     L=25e-3
-    global x = 0
+
 
     function linear_harvester!(du, u, p, t)
         xw, omega0, Q, omegad, Ad, alpha, C0, R, M, L = p
         # L = (xw / omega0) * sqrt(4 * K_harvesting_APA / M)
-        global x = u[1]
+        x = u[1]
         dotx = u[2]
         v = u[3]
         du[1] = dotx
@@ -41,10 +41,10 @@ function linear_trajectory()
         3 => 50:0.1e-3:150,
         4 => 100:0.1:500
     )
-    pnames = Dict(1 => "xw", 
-        2 => "omega0", 
-        3 => "Q",
-        4 => "omegad"
+    pnames = Dict(1 => L"x_w", 
+        2 => L"\omega_0", 
+        3 => L"Q",
+        4 => L"\omega_d"
     )
 
 
@@ -68,17 +68,25 @@ function linear_trajectory()
         ds, u0s; ps, idxs, tail=1000, pnames
     )
 
-    ax = Axis(figure[1,1][1,2]; xlabel = "Position", ylabel = "Énergie potentielle")
-    function distance_from_symmetry(u)
-        Ec = (M*omega0^2 / (8*xw^2)) * (x+xw)^2 * (x-xw)^2
-        return Ec
+    supertitle  = Label(figure[0,:][1,1:2], L"""\ddot{x} = -\frac{\omega_0^2}{2} - \frac{\omega_0}{Q}\dot{x} - 2 \frac{\alpha}{ML}x_wv +A_d \sin(\omega_d t)""", fontsize = 23)
+    title = Label(figure[0,:][2,1:2], L""" \dot{v} =   2 \frac{\alpha}{LC_0} x_w \dot{x} - \frac{v}{R C_0} """, fontsize = 23)
+
+
+    ax = Axis(figure[1,1][1,2]; 
+        xlabel = L"\text{Position}, x", 
+        ylabel = L"\text{Énergie potentielle}, E_p [J]")
+
+    function potential_energy(u)
+        Ep = (p0[2]*u[1])^2/4
+        return Ep
     end
     for (i, ob) in enumerate(obs)
-        ord = lift(abs -> distance_from_symmetry.(abs).*i/i, ob)
-        abs = 1:length(ord[])
+        y = lift(x -> potential_energy.(x), ob)
+        x_ = 1:length(y[])
 
-        lines!(ax, abs, ord; color = JULIADYNAMICS_COLORS[i])
+        scatter!(ax, x_, y; color = JULIADYNAMICS_COLORS[i])
     end
-    ax.limits = ((0, 1000), (0, 150))
-    figure
+    ax.limits = ((0, 1000), (-1.5, 0))
+    figuree
 end
+
