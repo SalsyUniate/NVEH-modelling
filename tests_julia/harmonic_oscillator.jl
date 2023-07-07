@@ -19,7 +19,7 @@ pnames = Dict(1 => "mass", 2 => "spring constant", 3 => "damping coefficient")
 
 u0 = [1.0, 0.0] 
 
-function sho!(du, u, p)
+function harmonic_oscillator!(du, u, p, t)
     m, k, d = p
     x = u[1]
     v = u[2]
@@ -29,7 +29,7 @@ function sho!(du, u, p)
 end
 
 diffeq = (alg=Tsit5(), dt=0.01, abstol=1.0e-6, reltol=1.0e-6, adaptive=false)
-ds = ContinuousDynamicalSystem(sho!, u0, p0)
+ds = ContinuousDynamicalSystem(harmonic_oscillator!, u0, p0)
 
 N = 10  # number of trajectories
 u0s = [[1.0, x / N] for x = 0:N-1]
