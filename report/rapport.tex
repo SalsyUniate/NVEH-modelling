@@ -84,7 +84,7 @@
 Ce stage a été réalisé dans le cadre d'un projet de recherche sur la récupération d'énergie vibratoire.
 Les récupérateurs d'énergie pourraient être une alternative plus propre aux batteries au lithium, à durée de vie limitée et très polluantes. Le but de ce stage est de réaliser une application avec interface graphique permettant de modéliser le comportement d'oscillateurs mécaniques et de pouvoir observer en temps réel l'impact de certains paramètres sur ceux-ci.
 Cette application a été réalisée en Julia, un langage informatique particulièrement adapté puisqu'il permet de créer des animations de façon facile et intuitive. Au moment de la rédaction de ce rapport, l'application n'est pas encore terminée.
-Le plus gros de ce stage a consisté en la recherche d'outils les plus adaptés possibles et la maîtrise du langage Julia. Les deux semaines de stage restantes seront donc consacrées à l'assemblage des différents éléments afin de créer une application cohérente, qui consistera en une fenêtre principale permettant de lancer différentes animations.
+Le plus gros de ce stage a consisté en la recherche d'outils les plus adaptés possible et la maîtrise du langage Julia. Les deux semaines de stage restantes seront donc consacrées à l'assemblage des différents éléments afin de créer une application cohérente, qui consistera en une fenêtre principale permettant de lancer différentes animations.
 
 
 
@@ -189,14 +189,14 @@ L'utilisation de récupérateurs d'énergie permet de récolter de l'énergie d'
 % Il en existe de plusieurs sortes, par exemple les récupérateurs d'énergie piézoélectriques linéaires, qui peuvent amplifier les vibrations s'ils sont excités à leur fréquence naturelle.
 On les décompose en plusieurs sous systèmes comme le montre la figure \ref{fig:wl_subsystems}:
 \begin{enumerate}
-  \item Un oscillateur mécanique dont la masse sismique est mise en mouvement dans le référenciel de l'oscillateur par l'accélération ambiante.
+  \item Un oscillateur mécanique dont la masse sismique est mise en mouvement dans le référentiel de l'oscillateur par l'accélération ambiante.
   \item Un transducteur électromécanique qui prélève une partie de l'énergie mécanique disponible dans l'oscillateur et l'injecte dans le circuit électrique.
   \item Un système de stockage qui assure les tâches de conditionnement et de stockage de l'énergie.
 \end{enumerate}
 
 Certains systèmes reposent sur des oscillateurs linéaires d'un point de vue mécanique.
 Ces derniers ne peuvent récupérer une puissance importante qu'au sein d'une bande passante très étroite.
-Les récupérateurs d'énergie vibratoire non linéaires ont une bande passante bien plus larges commme le montre la figure \ref{fig:wl_wideband}, bien que la complexité de leurs comportements puisse les rendre difficiles à analyser.
+Les récupérateurs d'énergie vibratoire non linéaires ont une bande passante bien plus larges comme le montre la figure \ref{fig:wl_wideband}, bien que la complexité de leurs comportements puisse les rendre difficiles à analyser.
 Dans le contexte de ce stage, nous nous intéressons à une technologie particulière de récupérateurs d'énergie vibratoire.
 Celle-ci est notamment développée au laboratoire SYMME au travers de plusieurs projets de recherche.
 Ils sont dits bistables car leur énergie potentielle mécanique comporte deux puits qui correspondent à deux positions stables comme le montre la figure \ref{fig:lc_potential}.
@@ -238,7 +238,7 @@ L'extraction de l'énergie mécanique y est réalisée par des cellules piézoé
     Le potentiel présente deux minimums qui sont aussi des positions d'équilibre en $x = \pm x_w$.
     Un point col est présent en $x = 0$.
     Les zones rouges de basse énergie représentent le lieu des orbites dites basses.
-    La zone verte de haute énergie est celui des orbites hautes.  Source:  \cite{lcharleuxHDR}.}
+    La zone verte de haute énergie est celle des orbites hautes.  Source:  \cite{lcharleuxHDR}.}
   \label{fig:lc_potential}
 \end{figure}
 
@@ -405,7 +405,7 @@ La figure \ref{fig:fig4} donne une vue de la fenêtre interactive avec l'un des 
 
 \begin{figure}[H]
   \includegraphics[width=\linewidth]{interactivewindow_3.png}
-  \caption{Illustration de l'effet du mouvement des curseurs sur les graphes de la fenêtre créée pour le stage. La modification des paramètres par les curseurs se répercutent sur la simulation, et les graphes sont recréés en temps réel.}
+  \caption{Illustration de l'effet du mouvement des curseurs sur les graphes de la fenêtre créée pour le stage. La modification des paramètres par les curseurs se répercute sur la simulation, et les graphes sont recréés en temps réel.}
   \label{fig:fig4}
 \end{figure}
 
@@ -480,7 +480,7 @@ Ainsi, par exemple, le graphe vu en figure \ref{fig:fig8} présente l'amplitude 
 Pour l'obtenir, il faut déclarer l'équation différentielle étudiée ainsi que le paramètre variable souhaité en abscisse.
 Cette possibilité de graphe ne fait pas encore partie du projet actuel de l'application, mais elle est très intéressante et y sera probablement ajoutée plus tard.
 
-Comme vu plus tôt, Julia présente également une librairie de systèmes dynamiques déjà programmés grace au paquetage \href{https://juliadynamics.github.io/DynamicalSystems.jl/latest/}{DynamicalSystems.jl} \cite{Datseris2018}.
+Comme vu plus tôt, Julia présente également une librairie de systèmes dynamiques déjà programmés grâce au paquetage \href{https://juliadynamics.github.io/DynamicalSystems.jl/latest/}{DynamicalSystems.jl} \cite{Datseris2018}.
 Il est possible de créer un objet de ce type afin d'utiliser les fonctions qui utilisent des systèmes dynamiques pour de la modélisation, par exemple.
 Ainsi, même si un système dynamique modélisant un oscillateur de Duffing existe déjà en Julia, un nouveau système a été créé afin de coller au modèle du récupérateur bistable utilisé par l'équipe de recherche, qui correspond à l'équation suivante : 
 \begin{equation}
