@@ -32,7 +32,7 @@ Ces deux dernière étapes peuvent prendre un certain temps, mais ne sont à eff
 <br><br>
 
 ## Exécution
-Pour lancer le projet, après avoir en avoir activé l'environnement, il faut exécuter la commande : 
+Pour lancer le projet, après avoir activé l'environnement, il faut exécuter la commande : 
 ```
 include("src.main.jl")
 ```
