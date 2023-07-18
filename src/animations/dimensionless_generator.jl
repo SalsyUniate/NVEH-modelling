@@ -39,7 +39,7 @@ function dimensionless_trajectory()
 
     
     p0 = [xw, Ad, fd, w0, R, L, M, Q, alpha, C0, kw, km2]
-    u0 = [xw, 1.0e-3, 0.0]
+    u0 = [1.0, 1.0e-3, 0.0]
 
     ps = Dict(
         1 => 0.7*p0[1]:0.1e-3:3.0*p0[1],
@@ -65,8 +65,8 @@ function dimensionless_trajectory()
 
     ds = ContinuousDynamicalSystem(dimensionless_generator!, u0, p0)
 
-    N = 2
-    u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
+    N = 5
+    u0s = [[2.0, x / N / 2, 1.0] for x = 0:N-1]
 
     idxs = [1, 2]
     diffeq = (alg=Tsit5(), dt=0.01, adaptive=true)
@@ -93,8 +93,9 @@ function dimensionless_trajectory()
     function potential_energy(u)
         x = u[1]
         xw = p0[1]
-        newx = x/xw
-        return newx^5/20 - newx^3/6
+        # newx = x/xw
+        return x^4/8 - x^2/4 + 1/8
+        # return newx^5/20 - newx^3/6
     end 
     for (i, ob) in enumerate(obs)
         y = lift(x -> potential_energy.(x), ob)
