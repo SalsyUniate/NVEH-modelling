@@ -1,24 +1,24 @@
 # JULIA ANIMATION PHASE SPACE HARMONIC OSCILLATOR
 using InteractiveDynamics
 using DynamicalSystems, GLMakie
-using OrdinaryDiffEq
+
 
 function duffing_trajectory()
     #SETUP
     alpha = -1.0   # stiffness
     beta = 1.0     # nonlinearity
-    gamma = 0.3    # damping
-    delta = 0.3    # amplitude of driving force
+    gamma = 0.3    # amplitude of driving force
+    delta = 0.3    # damping
     omega = 1.2    # frequency of driving force
 
 
     p0 = [alpha, beta, gamma, delta, omega]
     ps = Dict(
-        1 => -2.0:0.1:0.0, 
-        2 => 0.5:0.1:1.5,  
-        3 => 0.1:0.1:0.5,  
-        4 => 0.1:0.1:1.0,  
-        5 => 0.8:0.1:1.5   
+        1 => -2.0:0.1:2.0,
+        2 => 0.5:0.1:5.0,
+        3 => 0.0:0.05:10.0,
+        4 => 0.1:0.01:1.0,
+        5 => 0.5:0.1:1.5
     )
     pnames = Dict(1 => L"\alpha", 2 => L"\beta", 3 => L"\gamma", 4 => L"\delta", 5 => L"\omega")
 
@@ -29,11 +29,11 @@ function duffing_trajectory()
         x = u[1]
         dotx = u[2]
         du[1] = dotx
-        du[2] = -alpha*x - beta*x^3 - gamma*dotx + delta*cos(omega*t)
+        du[2] = -alpha*x - beta*x^3 - delta*dotx + gamma*cos(omega*t)
         return nothing
     end
+    # total_span = 20*(2.0*pi)/p0[5]
 
-    diffeq = (alg=Tsit5(), dt=0.01, abstol=1.0e-6, reltol=1.0e-6, adaptive=false)
     ds = ContinuousDynamicalSystem(duffing!, u0, p0)
 
     N = 1  # number of trajectories
@@ -41,9 +41,9 @@ function duffing_trajectory()
 
     idxs = [1, 2]
 
-    figure, obs, step, paramvals = interactive_evolution(ds, u0s; ps, idxs, pnames)
+    figure, obs, step, paramvals = interactive_evolution(ds, u0s; ps, idxs, pnames)#, total_span)
 
-    supertitle  = Label(figure[0,:], L"""\ddot{x} = - \alpha x - \beta x^3 - \gamma \dot{x} + \delta \cos(\omega t)""", fontsize = 25)
+    supertitle  = Label(figure[0,:], L"""\ddot{x} = - \alpha x - \beta x^3 - \delta \dot{x} + \gamma \cos(\omega t)""", fontsize = 25)
 
     ax = Axis(figure[1,1][1,2]; 
         xlabel = L"\text{Position}, x", 
