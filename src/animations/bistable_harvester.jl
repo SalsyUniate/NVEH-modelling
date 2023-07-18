@@ -22,7 +22,7 @@ function bistable_trajectory()
     Q = 87.0
     fd = 50.0
     omegad = 2.0 * pi * fd
-    Ad = 2.5
+    Ad = 5.0
     alpha = 0.068
     C0 = 1.05e-6
     R = 7.83e3
@@ -30,7 +30,7 @@ function bistable_trajectory()
     L=25e-3
 
     function bistable_harvester!(du, u, p, t)
-        xw, omega0, Q, omegad, Ad, alpha, C0, R, M, L = p
+        xw, omega0, Q, omegad, L, Ad, alpha, C0, R, M = p
 
         x = u[1]
         dotx = u[2]
@@ -46,19 +46,21 @@ function bistable_trajectory()
         return nothing
     end
 
-    p0 = [xw, omega0, Q, omegad, Ad, alpha, C0, R, M, L]
+    p0 = [xw, omega0, Q, omegad, L, Ad, alpha, C0, R, M,]
     u0 = [xw, 1.0e-3, 0.0]
 
     ps = Dict(
         1 => 0.7*p0[1]:0.1e-3:3.0*p0[1],
         2 => 0:0.1e-3:2, 
         3 => 50:0.1e-3:150,
-        4 => 1.0:0.1:20.0
+        4 => 5.0:0.1:600.0,
+        5 => 10e-3:1e-4:50e-3
     )
     pnames = Dict(1 => L"x_w",
         2 => L"\omega_0",
         3 => L"Q",
-        4 => L"\omega_d"
+        4 => L"\omega_d",
+        5 => L"L"
     )
 
     # limite du plan 3D (x, dotx, v)
@@ -70,13 +72,13 @@ function bistable_trajectory()
 
     ds = ContinuousDynamicalSystem(bistable_harvester!, u0, p0)
 
-    N = 2
+    N = 10
     u0s = [[xw, x / N / 2, 1.0] for x = 0:N-1]
 
     idxs = [1, 2]
 
     figure, obs, step, paramvals = interactive_evolution(
-        ds, u0s; ps, idxs, tail=1000, tsidxs=nothing, pnames
+        ds, u0s; ps, idxs, tail=2000, tsidxs=nothing, pnames
     )
     
 
@@ -90,14 +92,14 @@ function bistable_trajectory()
 
     ax = Axis(figure[1,1][1,2]; 
         xlabel = L"\text{Position}, x", 
-        ylabel = L"\text{Énergie potentielle}, E_p [J]")
+        ylabel = L"\text{Énergie potentielle}, E_p [mJ]")
 
     for (i, ob) in enumerate(obs)
-        y = lift(x -> potential_energy_state.(x), ob)
+        y = lift(x -> potential_energy_state.(x)*1e-3, ob)
         x_ = 1:length(y[])
         scatter!(ax, x_, y; color=JULIADYNAMICS_COLORS[i])
     end
-    ax.limits = ((0, 1000), (-0.1, 0.1))
+    ax.limits = ((0, 2000), (-0.1, 0.1))
 
 
 end
