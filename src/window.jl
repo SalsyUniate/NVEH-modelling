@@ -6,6 +6,7 @@ include("animations/duffing_oscillator.jl")
 include("animations/linear_harvester.jl")
 include("animations/harmonic_oscillator.jl")
 include("animations/dimensionless_generator.jl")
+include("animations/bistable_simple.jl")
 
 const io = PipeBuffer()
 
@@ -27,6 +28,9 @@ b_harmonic = GtkButton("Oscillateur harmonique")
 
 l_dimless = GtkLabel("Trajectoire en temps réel d'un générateur sans dimension :")
 b_dimless = GtkButton("Générateur sans dimension")
+
+l_simple_bistable = GtkLabel("Trajectoire en temps réel d'un bistable générique :")
+b_simple_bistable = GtkButton("Oscillateur bistable générique")
 
 pic = GtkImage("joli.png")
 
@@ -50,6 +54,10 @@ signal_connect(b_dimless, "clicked") do widget, others...
     dimensionless_trajectory()
 end
 
+signal_connect(b_simple_bistable, "clicked") do widget, others...
+    bistable_simple_trajectory()
+end
+
 
 
 grid[1,1] = l_bistable
@@ -67,7 +75,10 @@ grid[2,4] = b_harmonic
 grid[1,5] = l_dimless
 grid[2,5] = b_dimless
 
-grid[1:2,6] = pic
+grid[1,6] = l_simple_bistable
+grid[2,6] = b_simple_bistable
+
+grid[1:2,7] = pic
 
 
 push!(vbox, grid)
